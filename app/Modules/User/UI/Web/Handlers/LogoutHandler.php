@@ -1,0 +1,11 @@
+<?php
+
+namespace psnXT\Modules\User\UI\Web\Handlers;
+
+class LogoutHandler
+{
+    public function __invoke()
+    {
+        // TODO: Implement __invoke() method.
+    }
+}
