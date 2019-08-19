@@ -7,7 +7,7 @@
     </style>
 @stop
 @section('content')
-<div class="d-flex align-items-center justify-content-center h-100">
+<div class="d-flex align-items-center justify-content-center h-100 my-5">
     <div class="col-12 col-lg-10 col-xl-8">
         <form action="{{ route('install') }}" enctype="multipart/form-data" method="post">
             @csrf
