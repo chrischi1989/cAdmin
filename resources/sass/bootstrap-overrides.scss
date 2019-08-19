@@ -72,3 +72,9 @@ body {
 .form-control::placeholder {
     font-family:Nunito, "Font Awesome 5 Free", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+@media(min-width: 125em) {
+    html {
+        font-size: .79vw;
+    }
+}
