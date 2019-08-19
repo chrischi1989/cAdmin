@@ -1,4 +1,5 @@
 <?php
+
 namespace psnXT\Modules\Install\Tasks;
 
 use Artisan;
