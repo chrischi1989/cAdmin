@@ -3,12 +3,13 @@
 namespace psnXT\Modules\Install\Tasks;
 
 use Mail;
+use psnXT\Modules\Install\Mails\InstallationMail;
 
 /**
  * Class SendInstalltionMailTask
  * @package psnXT\Modules\Install\Tasks
  */
-class SendInstalltionMailTask
+class SendInstallationMailTask
 {
     /**
      * @var
@@ -19,7 +20,7 @@ class SendInstalltionMailTask
      * SendInstalltionMailTask constructor.
      * @param $installationMail
      */
-    public function __construct($installationMail)
+    public function __construct(InstallationMail $installationMail)
     {
         $this->installationMail = $installationMail;
     }
