@@ -29,6 +29,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $email
  * @property string $password
  * @property string $remember_token
+ * @property string $activation_token
  * @property int $failed_logins
  * @property int $failed_logins_max
  * @property boolean $password_expires
