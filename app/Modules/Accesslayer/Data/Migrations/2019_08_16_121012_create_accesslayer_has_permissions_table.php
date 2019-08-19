@@ -13,7 +13,7 @@ class CreateAccesslayerHasPermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accesslayer_has_permissions', function (Blueprint $table) {
+        Schema::create('accesslayer_has_modules_permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36);
             $table->char('layer_uuid', 36);
@@ -38,6 +38,6 @@ class CreateAccesslayerHasPermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accesslayer_has_permissions');
+        Schema::dropIfExists('accesslayer_has_modules_permissions');
     }
 }
