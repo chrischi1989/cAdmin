@@ -2,12 +2,13 @@
 
 namespace psnXT\Modules\Install\Actions;
 
+use Carbon\Carbon;
 use psnXT\Helpers;
 use psnXT\Modules\Install\Tasks\InstallTask;
-use psnxT\Modules\Install\Tasks\SeedTablesTask;
+use psnXT\Modules\Install\Tasks\SeedTablesTask;
 use psnXT\Modules\Install\Tasks\LockInstallerTask;
 use psnXT\Modules\Install\Tasks\MigrateTablesTask;
-use psnXT\Modules\Install\Tasks\SendInstalltionMailTask;
+use psnXT\Modules\Install\Tasks\SendInstallationMailTask;
 use psnXT\Modules\Install\UI\Web\Requests\Install;
 use psnXT\Modules\User\Tasks\StoreUserTask;
 use psnXT\Modules\Setting\Tasks\UpdateEnvTask;
@@ -39,7 +40,7 @@ class InstallAction
      */
     private $storeUserTask;
     /**
-     * @var SendInstalltionMailTask
+     * @var SendInstallationMailTask
      */
     private $sendInstallationMailTask;
     /**
@@ -54,7 +55,7 @@ class InstallAction
      * @param SeedTablesTask $seedTablesTask
      * @param InstallTask $installTask
      * @param StoreUserTask $storeUserTask
-     * @param SendInstalltionMailTask $sendInstallationMailTask
+     * @param SendInstallationMailTask $sendInstallationMailTask
      * @param LockInstallerTask $lockInstallerTask
      */
     public function __construct(
@@ -63,7 +64,7 @@ class InstallAction
         SeedTablesTask $seedTablesTask,
         InstallTask $installTask,
         StoreUserTask $storeUserTask,
-        SendInstalltionMailTask $sendInstallationMailTask,
+        SendInstallationMailTask $sendInstallationMailTask,
         LockInstallerTask $lockInstallerTask
     ) {
         $this->updateEnvTask            = $updateEnvTask;
@@ -78,6 +79,7 @@ class InstallAction
     /**
      * @param Install $request
      * @return bool
+     * @throws \Exception
      */
     public function run(Install $request)
     {
@@ -95,14 +97,16 @@ class InstallAction
         ];
 
         if($this->updateEnvTask->run($envData)) {
-            $this->installTask->run();
+
 
             $adminUser = [
-                'email'    => $request->post('email'),
-                'password' => Helpers::generatePassword(),
+                'email'        => $request->post('email'),
+                'password'     => Helpers::generatePassword(),
+                'activated_at' => Carbon::now(),
             ];
 
-            return $this->migrateTablesTask->run() &&
+            return $this->installTask->run() &&
+                   $this->migrateTablesTask->run() &&
                    $this->seedTablesTask->run() &&
                    $this->storeUserTask->run($adminUser) &&
                    $this->sendInstallationMailTask->run($request->post('email')) &&
