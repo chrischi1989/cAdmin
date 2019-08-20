@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,24 +16,24 @@ class CreateUserTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->char('uuid', 36);
-            $table->char('tenant_uuid', 36);
+            $table->char('tenant_uuid', 36)->nullable();
             $table->dateTime('created_at');
             $table->char('created_uuid', 36);
             $table->dateTime('updated_at');
             $table->char('updated_uuid', 36);
-            $table->dateTime('activated_at');
-            $table->char('activated_uuid', 36);
-            $table->dateTime('deactivated_at');
-            $table->char('deactivated_uuid', 36);
-            $table->dateTime('lastlogin_at');
+            $table->dateTime('activated_at')->nullable();
+            $table->char('activated_uuid', 36)->nullable();
+            $table->dateTime('deactivated_at')->nullable();
+            $table->char('deactivated_uuid', 36)->nullable();
+            $table->dateTime('lastlogin_at')->nullable();
             $table->string('email', 255);
             $table->string('password', 255);
-            $table->string('remember_token', 255);
+            $table->string('remember_token', 255)->nullable();
             $table->string('activation_token', 20);
-            $table->tinyInteger('failed_logins')->unsigned();
-            $table->tinyInteger('failed_logins_max')->unsigned();
-            $table->tinyInteger('password_expires')->unsigned();
-            $table->tinyInteger('password_expires_days')->unsigned();
+            $table->tinyInteger('failed_logins')->unsigned()->default(0);
+            $table->tinyInteger('failed_logins_max')->unsigned()->default(5);
+            $table->tinyInteger('password_expires')->unsigned()->default(1);
+            $table->tinyInteger('password_expires_days')->unsigned()->default(90);
 
             $table->index('uuid', 'uuid');
             $table->index('tenant_uuid', 'tenant_uuid');

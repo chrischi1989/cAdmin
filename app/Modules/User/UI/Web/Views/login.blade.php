@@ -14,6 +14,12 @@
                 <div class="card-body">
                     <form action="{{ route('user-login') }}" enctype="multipart/form-data" method="post">
                         @csrf
+                        @include('partials.messages')
+                        @if($loginDelay > 0)
+                        <div class="alert alert-info form-group" id="loginDelayNote">
+                            Bitte warten Sie <span>{{ $loginDelay }}</span> Sekunden bevor Sie sich erneut anmelden können.
+                        </div>
+                        @endif
                         <div class="row">
                             <div class="col-12">
                                 <input id="username" name="username" class="form-control" placeholder="Benutzername" autocomplete="off" required>

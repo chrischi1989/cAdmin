@@ -62,4 +62,24 @@ class Install extends FormRequest
     {
         return true;
     }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function success()
+    {
+        return redirect()->route('user-login-page')->with([
+            'success' => 'Die Installation wurde erfolgreich abgeschlossen.'
+        ]);
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function failed()
+    {
+        return redirect()->route('setup')->with([
+            'error' => 'Die Installation konnte aufgrund einer technischen Störung nicht abgeschlossen werden.'
+        ])->withInput();
+    }
 }

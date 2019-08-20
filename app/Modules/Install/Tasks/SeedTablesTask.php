@@ -15,19 +15,16 @@ class SeedTablesTask
      */
     public function run() {
         $order = [
-            'Modules',
+            'Module',
             'Install',
             'User',
             'Navigation',
-            'Settings',
-            'Backup',
-            'Dashboard',
-            'Media',
+            'Setting',
             'Accesslayer'
         ];
 
         foreach($order as $module) {
-            Artisan::call('db:seed --path=app/Modules/' . $module . '/Data/Seeders');
+            Artisan::call('db:seed', ['--class' => 'psnXT\Modules\\' . $module . '\Data\Seeders\DatabaseSeeder']);
         }
 
         return true;

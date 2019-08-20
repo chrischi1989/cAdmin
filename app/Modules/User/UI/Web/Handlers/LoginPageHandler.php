@@ -1,18 +1,25 @@
 <?php
 
-
 namespace psnXT\Modules\User\UI\Web\Handlers;
 
+use app\Modules\User\Actions\LoginDelayAction;
+use Illuminate\Http\Request;
 
 class LoginPageHandler
 {
-    public function __construct()
-    {
+    private $loginDelayAction;
 
+    public function __construct(LoginDelayAction $loginDelayAction)
+    {
+        $this->loginDelayAction = $loginDelayAction;
     }
 
-    public function __invoke()
+    public function __invoke(Request $request)
     {
-        return view('User.UI.Web.Views.login');
+        $loginDelay = $this->loginDelayAction->run($request);
+
+        return view('User.UI.Web.Views.login', [
+            'loginDelay' => $loginDelay
+        ]);
     }
 }

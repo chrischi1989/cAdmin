@@ -14,17 +14,17 @@ class MigrateTablesTask
      * @return bool
      */
     public function run() {
-        // In welcher Reihenfolge werden die Datenbanktabellen erstellt
         $order = [
-            'Modules',
+            'Module',
             'Install',
             'User',
             'Accesslayer',
             'Navigation',
-            'Settings',
+            'Setting',
             'Backup',
             'Dashboard',
-            'Media'
+            'Media',
+            'Tenant'
         ];
 
         foreach($order as $module) {

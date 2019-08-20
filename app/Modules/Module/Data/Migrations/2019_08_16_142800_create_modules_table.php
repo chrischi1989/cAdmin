@@ -21,7 +21,7 @@ class CreateModulesTable extends Migration
             $table->datetime('updated_at');
             $table->char('updated_uuid', 36)->nullable();
             $table->string('module', 50);
-            $table->string('public_name', 50);
+            $table->string('public_name', 50)->nullable();
             $table->integer('position')->unsigned()->default(0);
             $table->boolean('core')->default(0);
 

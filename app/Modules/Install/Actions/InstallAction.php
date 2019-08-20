@@ -2,7 +2,6 @@
 
 namespace psnXT\Modules\Install\Actions;
 
-use Carbon\Carbon;
 use psnXT\Helpers;
 use psnXT\Modules\Install\Tasks\InstallTask;
 use psnXT\Modules\Install\Tasks\SeedTablesTask;
@@ -10,8 +9,8 @@ use psnXT\Modules\Install\Tasks\LockInstallerTask;
 use psnXT\Modules\Install\Tasks\MigrateTablesTask;
 use psnXT\Modules\Install\Tasks\SendInstallationMailTask;
 use psnXT\Modules\Install\UI\Web\Requests\Install;
-use psnXT\Modules\User\Tasks\StoreUserTask;
 use psnXT\Modules\Setting\Tasks\UpdateEnvTask;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Class InstallAction
@@ -36,10 +35,6 @@ class InstallAction
      */
     private $installTask;
     /**
-     * @var StoreUserTask
-     */
-    private $storeUserTask;
-    /**
      * @var SendInstallationMailTask
      */
     private $sendInstallationMailTask;
@@ -54,7 +49,6 @@ class InstallAction
      * @param MigrateTablesTask $migrateTablesTask
      * @param SeedTablesTask $seedTablesTask
      * @param InstallTask $installTask
-     * @param StoreUserTask $storeUserTask
      * @param SendInstallationMailTask $sendInstallationMailTask
      * @param LockInstallerTask $lockInstallerTask
      */
@@ -63,7 +57,6 @@ class InstallAction
         MigrateTablesTask $migrateTablesTask,
         SeedTablesTask $seedTablesTask,
         InstallTask $installTask,
-        StoreUserTask $storeUserTask,
         SendInstallationMailTask $sendInstallationMailTask,
         LockInstallerTask $lockInstallerTask
     ) {
@@ -71,7 +64,6 @@ class InstallAction
         $this->migrateTablesTask        = $migrateTablesTask;
         $this->seedTablesTask           = $seedTablesTask;
         $this->installTask              = $installTask;
-        $this->storeUserTask            = $storeUserTask;
         $this->sendInstallationMailTask = $sendInstallationMailTask;
         $this->lockInstallerTask        = $lockInstallerTask;
     }
@@ -83,6 +75,11 @@ class InstallAction
      */
     public function run(Install $request)
     {
+        session([
+            'uuid'     => Uuid::uuid4(),
+            'password' => Helpers::generatePassword()
+        ]);
+
         $envData = [
             'APP_NAME'      => $request->post('APP_NAME'),
             'APP_DEBUG'     => $request->post('APP_DEBUG'),
@@ -97,19 +94,10 @@ class InstallAction
         ];
 
         if($this->updateEnvTask->run($envData)) {
-
-
-            $adminUser = [
-                'email'        => $request->post('email'),
-                'password'     => Helpers::generatePassword(),
-                'activated_at' => Carbon::now(),
-            ];
-
             return $this->installTask->run() &&
                    $this->migrateTablesTask->run() &&
                    $this->seedTablesTask->run() &&
-                   $this->storeUserTask->run($adminUser) &&
-                   $this->sendInstallationMailTask->run($request->post('email')) &&
+                   //$this->sendInstallationMailTask->run($request->post('email')) &&
                    $this->lockInstallerTask->run();
         }
 
