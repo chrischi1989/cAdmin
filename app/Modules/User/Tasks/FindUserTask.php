@@ -1,12 +1,13 @@
 <?php
 
-namespace app\Modules\User\Tasks;
+namespace psnXT\Modules\User\Tasks;
 
 use psnXT\Modules\User\Models\User;
 
 class FindUserTask
 {
     private $user;
+    private $query;
 
     public function __construct(User $user)
     {
@@ -18,7 +19,7 @@ class FindUserTask
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|User[]
      */
     public function run($with = []) {
-        return $this->user->with($with)->get();
+        return $this->query->with($with)->get();
     }
 
     /**
@@ -27,7 +28,7 @@ class FindUserTask
      * @return User
      */
     public function byUuid($uuid, $with = []) {
-        $this->user->where('uuid', $uuid);
+        $this->query = $this->user->where('uuid', $uuid);
 
         return $this->run($with)->first();
     }
@@ -38,8 +39,8 @@ class FindUserTask
      * @return User
      */
     public function byEmail($email, $with = []) {
-        $this->user->where('email', $email);
+        $this->query = $this->user->where('email', $email);
 
-        return $this->run($with)->first();
+        return $this->run()->first();
     }
 }

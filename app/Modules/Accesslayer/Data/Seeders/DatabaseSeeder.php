@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $now         = now();
-        $data        = [];
-        $moduleUuid  = Uuid::uuid4();
-        $layerUuid   = Uuid::uuid4();
+        $now               = now();
+        $data              = [];
+        $moduleUuid        = Uuid::uuid4();
+        $layerUuid         = Uuid::uuid4();
         $modulePermissions = [
             [
                 'uuid'        => Uuid::uuid4(),
@@ -79,19 +79,20 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-
         /** Fuege Navigationspunkt ein */
         DB::table('navigation')->insert([
-            'uuid'        => Uuid::uuid4(),
-            'parent_uuid' => null,
-            'module_uuid' => $moduleUuid,
-            'created_at'  => $now,
-            'updated_at'  => $now,
-            'position'    => 0,
-            'icon'        => $this->moduleIcon,
-            'title'       => $this->module,
-            'href'        => route('accesslayer-index'),
-            'deleteable'  => false
+            'uuid'         => Uuid::uuid4(),
+            'parent_uuid'  => null,
+            'module_uuid'  => $moduleUuid,
+            'created_at'   => $now,
+            'created_uuid' => session('uuid'),
+            'updated_at'   => $now,
+            'updated_uuid' => session('uuid'),
+            'position'     => 0,
+            'icon'         => $this->moduleIcon,
+            'title'        => $this->module,
+            'href'         => route('accesslayer-index'),
+            'deleteable'   => false
         ]);
 
         /** Fuege Admin-Zugriffsebene ein */

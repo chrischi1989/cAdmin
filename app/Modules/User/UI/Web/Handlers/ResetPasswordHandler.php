@@ -2,10 +2,20 @@
 
 namespace psnXT\Modules\User\UI\Web\Handlers;
 
+use psnXT\Modules\User\Actions\ResetPasswordAction;
+use psnXT\Modules\User\UI\Web\Requests\ResetPasswordRequest;
+
 class ResetPasswordHandler
 {
-    public function __invoke()
+    private $resetPasswordAction;
+
+    public function __construct(ResetPasswordAction $resetPasswordAction)
     {
-        // TODO: Implement __invoke() method.
+        $this->resetPasswordAction = $resetPasswordAction;
+    }
+
+    public function __invoke(ResetPasswordRequest $request)
+    {
+        return $this->resetPasswordAction->run($request) ? $request->success() : $request->failed();
     }
 }

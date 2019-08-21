@@ -1,12 +1,13 @@
 <?php
 
-
-namespace app\Modules\User\Tasks;
-
+namespace psnXT\Modules\User\Tasks;
 
 class SetLoginDelayTask
 {
-    public function run() {
-        return session('login_delay') - now()->diffInSeconds(session('login_lastattempt'));
+    public function run()
+    {
+        $calculatedWaitingTime = pow(config('User.login_delay')->setting_value, session('login_attempts'));
+
+        session(['login_delay' => $calculatedWaitingTime]);
     }
 }

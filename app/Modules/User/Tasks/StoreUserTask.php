@@ -49,7 +49,6 @@ class StoreUserTask
         $this->user->password_expires      = $data['password_expires'] ?? true;
         $this->user->password_expires_days = $data['password_expires_days'] ?? 90;
 
-
         return $this->user->save();
     }
 }

@@ -2,24 +2,22 @@
 
 namespace psnXT\Modules\User\UI\Web\Handlers;
 
-use app\Modules\User\Actions\LoginDelayAction;
 use Illuminate\Http\Request;
 
+/**
+ * Class LoginPageHandler
+ * @package psnXT\Modules\User\UI\Web\Handlers
+ */
 class LoginPageHandler
 {
-    private $loginDelayAction;
-
-    public function __construct(LoginDelayAction $loginDelayAction)
-    {
-        $this->loginDelayAction = $loginDelayAction;
-    }
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function __invoke(Request $request)
     {
-        $loginDelay = $this->loginDelayAction->run($request);
-
         return view('User.UI.Web.Views.login', [
-            'loginDelay' => $loginDelay
+            'loginDelay' => session()->has('login_attempts') ? session('login_delay') - now()->diffInSeconds(session('login_last_attempt')) : 0
         ]);
     }
 }

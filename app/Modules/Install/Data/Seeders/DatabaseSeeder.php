@@ -33,7 +33,10 @@ class DatabaseSeeder extends Seeder
             [
                 'uuid'           => Uuid::uuid4(),
                 'created_at'     => $now,
+                'created_uuid'   => session('uuid'),
                 'updated_at'     => $now,
+                'updated_uuid'   => session('uuid'),
+                'module_uuid'    => $moduleUuid,
                 'setting'        => 'APP_CUSTOMER',
                 'setting_value'  => request()->input('APP_CUSTOMER'),
                 'setting_values' => null,
@@ -42,7 +45,10 @@ class DatabaseSeeder extends Seeder
             [
                 'uuid'           => Uuid::uuid4(),
                 'created_at'     => $now,
+                'created_uuid'   => session('uuid'),
                 'updated_at'     => $now,
+                'updated_uuid'   => session('uuid'),
+                'module_uuid'    => $moduleUuid,
                 'setting'        => 'APP_CUSTOMER_BRANDING',
                 'setting_value'  => 'branding.jpg',
                 'setting_values' => null,

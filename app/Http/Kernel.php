@@ -61,6 +61,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'installed' => \psnXT\Http\Middleware\CheckInstallation::class,
+        'settings' => \psnXT\Http\Middleware\Settings::class,
     ];
 
     /**

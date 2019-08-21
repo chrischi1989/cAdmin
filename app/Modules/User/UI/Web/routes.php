@@ -5,7 +5,7 @@
     Route::post('logout', LogoutHandler::class)->name('user-logout');
     Route::get('lost-password', LostPasswordPageHandler::class)->name('user-lost-password-page');
     Route::post('lost-password', LostPasswordHandler::class)->name('user-lost-password');
-    Route::get('reset-password', ResetPasswordPageHandler::class)->name('user-reset-password-page');
+    Route::get('reset-password/{token}', ResetPasswordPageHandler::class)->name('user-reset-password-page');
     Route::post('reset-password', ResetPasswordHandler::class)->name('user-reset-password');
     Route::get('create', CreateHandler::class)->name('user-create');
     Route::post('store', StoreHandler::class)->name('user-store');

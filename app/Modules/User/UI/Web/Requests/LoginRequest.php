@@ -16,7 +16,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required',
+            'email'    => 'required|email',
             'password' => 'required'
         ];
     }
@@ -27,7 +27,8 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => 'Bitte geben Sie einen Benutzernamen an!',
+            'email.required'    => 'Bitte geben Sie einen E-Mail Adresse an!',
+            'email.email'       => 'Die angegebene E-Mail Adresse entspricht keinem gültigem Format.',
             'password.required' => 'Bitte geben Sie ein Passwort an!'
         ];
     }
@@ -41,11 +42,13 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function success()
     {
-
+        return redirect()->route('dashboard')->with([
+            'success' => 'Sie wurden erfolgreich angemeldet.'
+        ]);
     }
 
     /**
@@ -62,7 +65,7 @@ class LoginRequest extends FormRequest
      */
     public function passwordExpired()
     {
-        return redirect()->route('user-reset-password-page', ['token' => 'TODO'])->with([
+        return redirect()->route('user-reset-password-page', ['token' => session('password_reset_token')])->with([
             'info' => 'Ihr Passwort ist abgelaufen. Bitte erstellen Sie ein neues Passwort.'
         ]);
     }

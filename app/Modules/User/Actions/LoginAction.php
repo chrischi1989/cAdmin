@@ -2,76 +2,55 @@
 
 namespace psnXT\Modules\User\Actions;
 
-use app\Modules\User\Tasks\FindUserTask;
-use app\Modules\User\Tasks\SetLoginAttemptsTask;
-use app\Modules\User\Tasks\SetLoginDelayTask;
+use psnXT\Modules\User\Tasks\CleanLoginSessionTask;
+use psnXT\Modules\User\Tasks\FindUserTask;
+use psnXT\Modules\User\Tasks\StorePasswordResetTask;
+use psnXT\Modules\User\Tasks\SetLoginAttemptsTask;
+use psnXT\Modules\User\Tasks\SetLoginDelayTask;
 use psnXT\Modules\User\UI\Web\Requests\LoginRequest;
 
 class LoginAction
 {
     private $findUserTask;
-    private $authenticateUserTask;
     private $setLoginDelayTask;
     private $setLoginAttemptsTask;
+    private $storePasswordResetTask;
+    private $cleanLoginSessionTask;
 
     public function __construct(
         FindUserTask $findUserTask,
         SetLoginDelayTask $setLoginDelayTask,
-        SetLoginAttemptsTask $setLoginAttemptsTask
+        SetLoginAttemptsTask $setLoginAttemptsTask,
+        StorePasswordResetTask $storePasswordResetTask,
+        CleanLoginSessionTask $cleanLoginSessionTask
     ) {
-        $this->findUserTask         = $findUserTask;
-        $this->authenticateUserTask = $authenticateUserTask;
-        $this->setLoginDelayTask    = $setLoginDelayTask;
-        $this->setLoginAttemptsTask = $setLoginAttemptsTask;
+        $this->findUserTask           = $findUserTask;
+        $this->setLoginDelayTask      = $setLoginDelayTask;
+        $this->setLoginAttemptsTask   = $setLoginAttemptsTask;
+        $this->storePasswordResetTask = $storePasswordResetTask;
+        $this->cleanLoginSessionTask  = $cleanLoginSessionTask;
     }
 
     public function run(LoginRequest $request, $loginOptions)
     {
-        $user = $this->findUserTask->byEmail($request->post('email'));
-        if(is_null($user)) return false;
-
-        $auth = auth()->attempt([
-            'email'    => $user->email,
+        $user        = $this->findUserTask->byEmail($request->post('email'));
+        $credentials = [
+            'email'    => $request->post('email'),
             'password' => $request->post('password')
-        ]);
+        ];
 
-        if(!$auth) {
+        if (!auth()->attempt($credentials, $request->has('remember-me'))) {
+            $this->setLoginAttemptsTask->run($user);
 
-            $loginAttempts = $request->session()->has('login_attempts') ? $this->setLoginAttemptsTask->run() : 1;
-
-            if($loginOptions['withDelay']) {
-                $loginDelay = $request->session()->has('login_attempts') ? $this->setLoginDelayTask->run() : 0;
-                if($loginDelay > 0) {
-                    session([
-                        'login_attempts'    => $loginAttempts,
-                        'login_delay'       => pow(config('User.login_delay')->setting_value, $loginAttempts),
-                        'login_lastattempt' => now(),
-                    ]);
-                }
-            }
+            isset($loginOptions['withDelay']) ? $this->setLoginDelayTask->run() : null;
 
             return false;
         }
 
-        if($loginOptions['withPasswordExpiry']) {
-            if (now()->diffInDays($user->updated_at) > $user->password_expires_days && $user->password_expires) {
-                $this->passwordResetEntity->add($user);
-
-                return false;
-            }
-
-            return true;
+        if (isset($loginOptions['withPasswordExpiry']) && now()->diffInDays($user->updated_at) > $user->password_expires_days && $user->password_expires) {
+            return $this->storePasswordResetTask->run($user);
         }
 
-        $request->session()->forget([
-            'login_attempts',
-            'reset_attempts',
-            'login_delay',
-            'reset_delay',
-            'login_lastattempt',
-            'reset_lastattempt'
-        ]);
-
-        return true;
+        return $this->cleanLoginSessionTask->run();
     }
 }

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use psnXT\Modules\Accesslayer\Models\Layer;
 
 /**
  * Class User
@@ -42,19 +43,49 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+     * @var bool
+     */
+    public $incrementing = false;
+    /**
+     * @var string
+     */
+    protected $table = 'users';
+    /**
+     * @var string
+     */
+    protected $primaryKey = 'uuid';
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
-    public function accesslayer() {
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function accesslayer()
+    {
+        return $this->belongsToMany(Layer::class, 'users_has_accesslayer', 'layer_uuid', 'user_uuid');
     }
 
-    public function profile() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_uuid', 'uuid');
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function passwordReset()
+    {
+        return $this->hasOne(PasswordReset::class, 'user_uuid', 'uuid');
     }
 }

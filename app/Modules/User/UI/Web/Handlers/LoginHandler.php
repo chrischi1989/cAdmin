@@ -18,13 +18,10 @@ class LoginHandler
         $this->loginAction = $loginAction;
     }
 
-    public function __invoke(LoginRequest $loginRequest)
+    public function __invoke(LoginRequest $request)
     {
-        $result = $this->loginAction->run($loginRequest, $this->loginOptions);
-        if(!$result && $this->loginOptions['withPasswordExpiry']) {
-            return $loginRequest->passwordExpired();
-        }
+        $result = $this->loginAction->run($request, $this->loginOptions);
 
-        return $result ? $loginRequest->success() : $loginRequest->failed();
+        return $result ? $request->success() : (session()->has('password_reset_token') ? $request->passwordExpired() : $request->failed());
     }
 }

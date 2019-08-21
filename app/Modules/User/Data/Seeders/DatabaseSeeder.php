@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
     /**
      * @throws \Exception
      */
-    public function run() {
+    public function run()
+    {
         $now        = now();
         $moduleUuid = Uuid::uuid4();
 
@@ -47,9 +48,9 @@ class DatabaseSeeder extends Seeder
         DB::table('modules')->insert([
             'uuid'         => $moduleUuid,
             'created_at'   => $now,
-            'created_uuid' => !is_null(request()->user()) ? request()->user()->uuid : null,
+            'created_uuid' => session('uuid'),
             'updated_at'   => $now,
-            'updated_uuid' => !is_null(request()->user()) ? request()->user()->uuid : null,
+            'updated_uuid' => session('uuid'),
             'module'       => 'User',
             'core'         => true
         ]);
@@ -155,16 +156,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('navigation')->insert([
-            'uuid'        => Uuid::uuid4(),
-            'parent_uuid' => null,
-            'module_uuid' => $moduleUuid,
-            'created_at'  => $now,
-            'updated_at'  => $now,
-            'position'    => 0,
-            'icon'        => $this->moduleIcon,
-            'title'       => $this->module,
-            'href'        => route('user-index'),
-            'deleteable'  => false
+            'uuid'         => Uuid::uuid4(),
+            'parent_uuid'  => null,
+            'module_uuid'  => $moduleUuid,
+            'created_at'   => $now,
+            'created_uuid' => session('uuid'),
+            'updated_at'   => $now,
+            'updated_uuid' => session('uuid'),
+            'position'     => 0,
+            'icon'         => $this->moduleIcon,
+            'title'        => $this->module,
+            'href'         => route('user-index'),
+            'deleteable'   => false
         ]);
     }
 }
