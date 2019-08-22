@@ -3,6 +3,7 @@
 namespace psnXT\Modules\User\UI\Web\Handlers;
 
 use Illuminate\Http\Request;
+use psnXT\Modules\User\Actions\LoginPageAction;
 
 /**
  * Class LoginPageHandler
@@ -10,14 +11,25 @@ use Illuminate\Http\Request;
  */
 class LoginPageHandler
 {
+    private $loginPageAction;
+
+    public function __construct(LoginPageAction $loginPageAction)
+    {
+        $this->loginPageAction = $loginPageAction;
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function __invoke(Request $request)
     {
-        return view('User.UI.Web.Views.login', [
-            'loginDelay' => session()->has('login_attempts') ? session('login_delay') - now()->diffInSeconds(session('login_last_attempt')) : 0
-        ]);
+        if(!$this->loginPageAction->run()) {
+            return view('User.UI.Web.Views.login', [
+                'loginDelay' => session()->has('login_attempts') ? session('login_delay') - now()->diffInSeconds(session('login_last_attempt')) : 0
+            ]);
+        }
+
+        return redirect()->route('dashboard');
     }
 }

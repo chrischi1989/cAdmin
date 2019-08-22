@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use psnXT\Modules\Accesslayer\Models\Layer;
+use psnXT\Traits\Tenant;
 
 /**
  * Class User
@@ -40,6 +41,7 @@ use psnXT\Modules\Accesslayer\Models\Layer;
  */
 class User extends Authenticatable
 {
+    use Tenant;
     use Notifiable;
 
     /**

@@ -27,7 +27,8 @@ class InstallHandler
 
     /**
      * @param Install $request
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function __invoke(Install $request)
     {

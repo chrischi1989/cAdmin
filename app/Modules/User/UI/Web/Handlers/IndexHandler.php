@@ -13,6 +13,6 @@ class IndexHandler
 
     public function __invoke()
     {
-
+        return 'User Module';
     }
 }

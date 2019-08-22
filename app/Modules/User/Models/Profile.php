@@ -4,6 +4,7 @@ namespace psnXT\Modules\User\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use psnXT\Traits\Tenant;
 
 /**
  * Class Profile
@@ -32,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Profile extends Model
 {
+    use Tenant;
+
     /**
      * @var bool
      */

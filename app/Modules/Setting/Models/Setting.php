@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use psnXT\Modules\Module\Models\Module;
 use psnXT\Modules\User\Models\User;
+use psnXT\Traits\Tenant;
 
 /**
  * Class Setting
@@ -28,6 +29,8 @@ use psnXT\Modules\User\Models\User;
  */
 class Setting extends Model
 {
+    use Tenant;
+
     /**
      * @var bool
      */

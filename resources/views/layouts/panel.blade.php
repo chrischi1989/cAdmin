@@ -10,6 +10,19 @@
         <title>{{ env('APP_NAME') }} :: @yield('pagetitle')</title>
     </head>
     <body>
+        <div class="container-fluid">
+            <header class="row">
+                <div class="branding">
+                    <a href=""
+                </div>
+            </header>
+            <div class="row">
+                <nav class="col-12" id="navigation">
+
+                </nav>
+                <div
+            </div>
+        </div>
         @yield('content')
 
         <script src="{{ asset('js/jquery.min.js') }}"></script>

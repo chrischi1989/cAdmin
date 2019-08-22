@@ -4,6 +4,7 @@ namespace psnXT\Modules\User\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use psnXT\Traits\Tenant;
 
 /**
  * Class PasswordReset
@@ -25,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PasswordReset extends Model
 {
+    use Tenant;
+
     /**
      * @var bool
      */

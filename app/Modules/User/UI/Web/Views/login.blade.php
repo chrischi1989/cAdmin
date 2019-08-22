@@ -9,8 +9,8 @@
 @section('content')
 <div class="d-flex align-items-center justify-content-center h-100">
     <div class="col-12 col-sm-10 col-lg-8 col-xl-6">
-        <div class="card">
-            <h5 class="card-header">Anmeldung</h5>
+        <div class="card card-default shadow">
+
             <div class="card-body">
                 <form action="{{ route('user-login') }}" enctype="multipart/form-data" method="post" id="loginform">
                     @csrf
@@ -21,10 +21,10 @@
                     </div>
                     @endif
                     <div class="form-group">
-                        <input id="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="E-Mail Adresse" autocomplete="off" required>
+                        <input id="email" name="email" class="form-control shadow{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="E-Mail Adresse" autocomplete="off" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" id="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Passwort" autocomplete="off" required>
+                        <input type="password" id="password" name="password" class="form-control shadow{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Passwort" autocomplete="off" required>
                     </div>
                     <div class="form-group">
                         <div class="row align-items-center my-3">
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group mb-0">
+                    <div class="form-group">
                         <a href="{{ route('user-lost-password-page') }}">
                             <span class="fas fa-key"></span>
                             Passwort vergessen?
