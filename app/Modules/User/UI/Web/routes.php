@@ -1,4 +1,11 @@
 <?php
+Route::group([
+    'prefix'     => 'admin/user',
+    'middleware' => [
+        'installed',
+        'settings'
+    ]
+], function() {
     Route::get('/', IndexHandler::class)->name('user-index');
     Route::get('login', LoginPageHandler::class)->name('user-login-page');
     Route::post('login', LoginHandler::class)->name('user-login');
@@ -7,7 +14,9 @@
     Route::get('reset-password/{token}', ResetPasswordPageHandler::class)->name('user-reset-password-page');
     Route::post('reset-password', ResetPasswordHandler::class)->name('user-reset-password');
 
-    Route::group(['middleware' => 'auth'], function() {
+    Route::group([
+        'middleware' => 'auth'
+    ], function () {
         Route::post('logout', LogoutHandler::class)->name('user-logout');
         Route::get('create', CreateHandler::class)->name('user-create');
         Route::post('store', StoreHandler::class)->name('user-store');
@@ -17,3 +26,4 @@
         Route::get('profile', ProfilePageHandler::class)->name('user-profile-page');
         Route::post('profile', ProfileHandler::class)->name('user-profile');
     });
+});

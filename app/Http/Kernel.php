@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'verified'      => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'installed'     => \psnXT\Http\Middleware\CheckInstallation::class,
         'settings'      => \psnXT\Http\Middleware\Settings::class,
+        'navigation'    => \psnXT\Http\Middleware\Navigation::class,
     ];
 
     /**
