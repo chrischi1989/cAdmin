@@ -174,6 +174,7 @@ return [
         // psnXT\Providers\BroadcastServiceProvider::class,
         psnXT\Providers\EventServiceProvider::class,
         psnXT\Providers\RouteServiceProvider::class,
+        psnXT\Providers\ModuleServiceProvider::class,
 
     ],
 

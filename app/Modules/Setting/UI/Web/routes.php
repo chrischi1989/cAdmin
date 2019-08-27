@@ -3,8 +3,10 @@ Route::group([
     'prefix' => 'admin/setting',
     'middleware' => [
         'installed',
+        'auth',
+        'tenant',
         'settings',
-        'auth'
+        'navigation'
     ]
 ], function() {
     Route::get('/', IndexHandler::class)->name('setting-index');

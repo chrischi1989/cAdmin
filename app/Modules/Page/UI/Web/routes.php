@@ -10,7 +10,10 @@ Route::group([
 
     Route::group([
         'prefix'     => 'admin/page',
-        'middleware' => ['auth']
+        'middleware' => [
+            'tenant',
+            'auth'
+        ]
     ], function() {
         Route::get('/', IndexHandler::class);
     });

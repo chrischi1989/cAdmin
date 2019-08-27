@@ -6,6 +6,6 @@ class IndexHandler
 {
     public function __invoke()
     {
-        return view('Dashboard.UI.Web.Views.index');
+        return view('dashboard::index');
     }
 }

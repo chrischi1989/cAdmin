@@ -6,7 +6,6 @@ Route::group([
         'settings'
     ]
 ], function() {
-    Route::get('/', IndexHandler::class)->name('user-index');
     Route::get('login', LoginPageHandler::class)->name('user-login-page');
     Route::post('login', LoginHandler::class)->name('user-login');
     Route::get('lost-password', LostPasswordPageHandler::class)->name('user-lost-password-page');
@@ -15,8 +14,12 @@ Route::group([
     Route::post('reset-password', ResetPasswordHandler::class)->name('user-reset-password');
 
     Route::group([
-        'middleware' => 'auth'
+        'middleware' => [
+            'auth',
+            'tenant'
+        ]
     ], function () {
+        Route::get('/', IndexHandler::class)->name('user-index');
         Route::post('logout', LogoutHandler::class)->name('user-logout');
         Route::get('create', CreateHandler::class)->name('user-create');
         Route::post('store', StoreHandler::class)->name('user-store');

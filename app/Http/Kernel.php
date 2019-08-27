@@ -31,7 +31,6 @@ class Kernel extends HttpKernel
             \psnXT\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            \psnXT\Http\Middleware\Tenant::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \psnXT\Http\Middleware\VerifyCsrfToken::class,
@@ -64,6 +63,7 @@ class Kernel extends HttpKernel
         'installed'     => \psnXT\Http\Middleware\CheckInstallation::class,
         'settings'      => \psnXT\Http\Middleware\Settings::class,
         'navigation'    => \psnXT\Http\Middleware\Navigation::class,
+        'tenant'        => \psnXT\Http\Middleware\Tenant::class,
     ];
 
     /**
@@ -75,6 +75,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewarePriority = [
         \Illuminate\Session\Middleware\StartSession::class,
+        \psnXT\Http\Middleware\Tenant::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \psnXT\Http\Middleware\Authenticate::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,

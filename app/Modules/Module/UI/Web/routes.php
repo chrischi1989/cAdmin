@@ -3,8 +3,10 @@ Route::group([
     'prefix' => 'admin/module',
     'middleware' => [
         'installed',
+        'auth',
+        'tenant',
         'settings',
-        'auth'
+        'navigation'
     ]
 ], function() {
     Route::get('/', IndexHandler::class)->name('module-index');

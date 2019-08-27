@@ -38,8 +38,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-
-        $this->mapModuleRoutes();
     }
 
     /**
@@ -69,14 +67,5 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
-    }
-
-    /**
-     * @return void
-     */
-    protected function mapModuleRoutes() {
-        Route::middleware('web')
-             ->namespace('psnXT\Modules')
-             ->group(base_path('routes/modules.php'));
     }
 }

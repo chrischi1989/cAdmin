@@ -3,9 +3,10 @@ Route::group([
     'prefix'     => 'admin/dashboard',
     'middleware' => [
         'installed',
+        'auth',
+        'tenant',
         'settings',
-        'navigation',
-        'auth'
+        'navigation'
     ],
 ], function() {
     Route::get('/', IndexHandler::class)->name('dashboard');

@@ -1,5 +1,14 @@
 <?php
-Route::group(['prefix' => 'admin/accesslayer'], function() {
+Route::group([
+    'prefix'     => 'admin/accesslayer',
+    'middleware' => [
+        'installed',
+        'auth',
+        'tenant',
+        'settings',
+        'navigation'
+    ]
+], function() {
     Route::get('/', IndexHandler::class)->name('accesslayer-index');
     Route::get('create', CreateHandler::class)->name('accesslayer-create');
     Route::post('store', StoreHandler::class)->name('accesslayer-store');

@@ -1,2 +1,6 @@
 <?php
-    Route::group(['namespace' => 'UI\Web\Handlers'], app_path('Modules/User/UI/Web/routes.php'));
+/** Web Routes */
+Route::group([
+    'namespace'  => 'psnXT\Modules\User\UI\Web\Handlers',
+    'middleware' => 'web'
+], __DIR__ . '/UI/Web/routes.php');

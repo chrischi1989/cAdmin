@@ -3,8 +3,10 @@ Route::group([
     'prefix'     => 'admin/navigation',
     'middleware' => [
         'installed',
+        'auth',
+        'tenant',
         'settings',
-        'auth'
+        'navigation'
     ]
 ], function() {
     Route::get('/', IndexHandler::class)->name('navigation-index');
