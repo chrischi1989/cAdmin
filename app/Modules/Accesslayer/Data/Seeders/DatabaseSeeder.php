@@ -26,6 +26,13 @@ class DatabaseSeeder extends Seeder
                 'module_uuid' => $moduleUuid,
                 'created_at'  => $now,
                 'updated_at'  => $now,
+                'permission'  => 'show'
+            ],
+            [
+                'uuid'        => Uuid::uuid4(),
+                'module_uuid' => $moduleUuid,
+                'created_at'  => $now,
+                'updated_at'  => $now,
                 'permission'  => 'create'
             ],
             [
@@ -33,21 +40,14 @@ class DatabaseSeeder extends Seeder
                 'module_uuid' => $moduleUuid,
                 'created_at'  => $now,
                 'updated_at'  => $now,
-                'permission'  => 'read'
+                'permission'  => 'edit'
             ],
             [
                 'uuid'        => Uuid::uuid4(),
                 'module_uuid' => $moduleUuid,
                 'created_at'  => $now,
                 'updated_at'  => $now,
-                'permission'  => 'update'
-            ],
-            [
-                'uuid'        => Uuid::uuid4(),
-                'module_uuid' => $moduleUuid,
-                'created_at'  => $now,
-                'updated_at'  => $now,
-                'permission'  => 'delete'
+                'permission'  => 'destroy'
             ]
         ];
 

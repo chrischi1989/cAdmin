@@ -14,17 +14,10 @@ class SeedTablesTask
      * @return bool
      */
     public function run() {
-        $order = [
-            'Module',
-            'Install',
-            'User',
-            'Navigation',
-            'Setting',
-            'Accesslayer'
-        ];
-
-        foreach($order as $module) {
-            Artisan::call('db:seed', ['--class' => 'psnXT\Modules\\' . $module . '\Data\Seeders\DatabaseSeeder']);
+        foreach(scandir(app_path('Modules')) as $module) {
+            if($module != '.' && $module != '..' && file_exists(app_path('Modules/' . $module . '/Data/Seeders/DatabaseSeeder.php'))) {
+                Artisan::call('db:seed', ['--class' => 'psnXT\Modules\\' . $module . '\Data\Seeders\DatabaseSeeder']);
+            }
         }
 
         return true;

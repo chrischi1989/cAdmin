@@ -38,6 +38,13 @@ class DatabaseSeeder extends Seeder
                 'module_uuid' => $moduleUuid,
                 'created_at'  => $now,
                 'updated_at'  => $now,
+                'permission'  => 'show'
+            ],
+            [
+                'uuid'        => Uuid::uuid4(),
+                'module_uuid' => $moduleUuid,
+                'created_at'  => $now,
+                'updated_at'  => $now,
                 'permission'  => 'create'
             ],
             [
@@ -45,21 +52,14 @@ class DatabaseSeeder extends Seeder
                 'module_uuid' => $moduleUuid,
                 'created_at'  => $now,
                 'updated_at'  => $now,
-                'permission'  => 'read'
+                'permission'  => 'edit'
             ],
             [
                 'uuid'        => Uuid::uuid4(),
                 'module_uuid' => $moduleUuid,
                 'created_at'  => $now,
                 'updated_at'  => $now,
-                'permission'  => 'update'
-            ],
-            [
-                'uuid'        => Uuid::uuid4(),
-                'module_uuid' => $moduleUuid,
-                'created_at'  => $now,
-                'updated_at'  => $now,
-                'permission'  => 'delete'
+                'permission'  => 'destroy'
             ]
         ]);
 
@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
             'created_at'   => $now,
             'created_uuid' => session('uuid'),
             'updated_at'   => $now,
-            'update_uuid'  => session('uuid'),
+            'updated_uuid' => session('uuid'),
             'position'     => 0,
             'icon'         => $this->moduleIcon,
             'title'        => $this->module,

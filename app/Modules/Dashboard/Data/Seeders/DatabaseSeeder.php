@@ -1,6 +1,6 @@
 <?php
 
-namespace psnXT\Modules\Module\Data\Seeders;
+namespace psnXT\Modules\Dashboard\Data\Seeders;
 
 use DB;
 use Illuminate\Database\Seeder;
@@ -8,8 +8,8 @@ use Ramsey\Uuid\Uuid;
 
 class DatabaseSeeder extends Seeder
 {
-    private $module     = 'Module';
-    private $moduleIcon = 'fas fa-project-diagram';
+    private $module     = 'Dashboard';
+    private $moduleIcon = 'fas fa-home';
 
     /**
      * @throws \Exception
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'created_uuid' => !is_null(request()->user()) ? request()->user()->uuid : session('uuid'),
             'updated_at'   => $now,
             'updated_uuid' => !is_null(request()->user()) ? request()->user()->uuid : session('uuid'),
-            'module'       => 'Modules',
+            'module'       => 'Dashboard',
             'core'         => true
         ]);
 
@@ -71,7 +71,7 @@ class DatabaseSeeder extends Seeder
             'position'     => 0,
             'icon'         => $this->moduleIcon,
             'title'        => $this->module,
-            'href'         => route('module-index'),
+            'href'         => route('dashboard'),
             'deleteable'   => false
         ]);
     }

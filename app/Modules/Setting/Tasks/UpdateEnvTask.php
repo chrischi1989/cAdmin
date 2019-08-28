@@ -2,7 +2,6 @@
 
 namespace psnXT\Modules\Setting\Tasks;
 
-use DB;
 use Jackiedo\DotenvEditor\DotenvEditor;
 
 /**
@@ -25,10 +24,9 @@ class UpdateEnvTask
         $this->env = $dotenvEditor;
     }
 
-
     /**
      * @param array $data
-     * @return bool
+     * @return DotenvEditor
      */
     public function run($data = []) {
         $this->env->setKeys([
@@ -72,11 +70,8 @@ class UpdateEnvTask
                 'key'   => 'DB_PASSWORD',
                 'value' => $data['DB_PASSWORD'] ?? env('DB_PASSWORD'),
             ],
-        ])->save();
+        ]);
 
-        DB::purge();
-        DB::reconnect();
-
-        return true;
+        return $this->env->save();
     }
 }
