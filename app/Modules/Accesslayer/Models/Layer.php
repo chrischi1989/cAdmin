@@ -4,6 +4,7 @@ namespace psnXT\Modules\Accesslayer\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use psnXT\Modules\Module\Models\ModulePermission;
 use psnXT\Modules\User\Models\User;
 
 /**
@@ -27,4 +28,12 @@ class Layer extends Model
     public $incrementing  = false;
     protected $table      = 'accesslayer';
     protected $primaryKey = 'uuid';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function permissions()
+    {
+        return $this->belongsToMany(ModulePermission::class, 'accesslayer_has_modules_permissions', 'layer_uuid', 'permission_uuid');
+    }
 }

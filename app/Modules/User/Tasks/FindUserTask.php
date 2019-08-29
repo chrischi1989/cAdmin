@@ -39,7 +39,7 @@ class FindUserTask
      * @return User
      */
     public function byEmail($email, $with = []) {
-        $this->query = $this->user->where('email', $email);
+        $this->query = $this->user->where('email_hashed', hash('sha512', $email));
 
         return $this->run()->first();
     }

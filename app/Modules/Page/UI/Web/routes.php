@@ -2,7 +2,8 @@
 Route::group([
     'middleware' => [
         'installed',
-        'settings'
+        'settings',
+        'tenant'
     ]
 ], function() {
     Route::get('admin', function() { return redirect()->route('user-login-page'); });
@@ -11,7 +12,6 @@ Route::group([
     Route::group([
         'prefix'     => 'admin/page',
         'middleware' => [
-            'tenant',
             'auth'
         ]
     ], function() {

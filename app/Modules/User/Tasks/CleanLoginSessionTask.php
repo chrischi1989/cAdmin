@@ -2,6 +2,8 @@
 
 namespace psnXT\Modules\User\Tasks;
 
+use Illuminate\Contracts\Auth\Authenticatable;
+
 /**
  * Class CleanLoginSessionTask
  * @package psnXT\Modules\User\Tasks
@@ -9,15 +11,19 @@ namespace psnXT\Modules\User\Tasks;
 class CleanLoginSessionTask
 {
     /**
-     * @return bool
+     * @param Authenticatable $user
+     * @return mixed
      */
-    public function run() {
+    public function run(Authenticatable $user)
+    {
         session()->forget([
             'login_attempts',
             'login_delay',
             'login_last_attempt'
         ]);
 
-        return true;
+        $user->lastlogin_at = now();
+
+        return $user->save();
     }
 }

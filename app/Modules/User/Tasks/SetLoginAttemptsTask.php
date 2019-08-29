@@ -12,15 +12,21 @@ class SetLoginAttemptsTask
             'login_last_attempt' => now()
         ]);
 
-        if($user instanceof User) {
-            if($user->failed_logins + 1 > $user->failed_logins_max) {
-                $user->deactivated_at   = now();
-                $user->deactivated_uuid = $user->uuid;
-            } else {
-                $user->failed_logins++;
+        if(!$user instanceof User) {
+            return true;
+        }
+
+        if($user->failed_logins + 1 > $user->failed_logins_max) {
+            if(!is_null($user->deactivated_at)) {
+                return true;
             }
 
-            $user->save();
+            $user->deactivated_at   = now();
+            $user->deactivated_uuid = $user->uuid;
+        } else {
+            $user->failed_logins++;
         }
+
+        return $user->save();
     }
 }

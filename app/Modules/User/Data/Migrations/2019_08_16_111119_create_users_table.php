@@ -26,7 +26,8 @@ class CreateUsersTable extends Migration
             $table->dateTime('deactivated_at')->nullable();
             $table->char('deactivated_uuid', 36)->nullable();
             $table->dateTime('lastlogin_at')->nullable();
-            $table->string('email', 255);
+            $table->string('email_hashed', 255);
+            $table->text('email_encrypted');
             $table->string('password', 255);
             $table->string('remember_token', 255)->nullable();
             $table->string('activation_token', 20);

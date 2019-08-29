@@ -48,7 +48,13 @@
 }
 body {
   font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  background: #eef0f4;
+  background: #eff1f4;
+  color: #26425f;
+  font-size: 100%;
+}
+
+a {
+  color: #4198dc;
 }
 
 .alert {
@@ -241,63 +247,6 @@ body {
   box-shadow: none;
 }
 
-.topbar {
-  background: #fff;
-}
-.topbar nav {
-  display: flex;
-}
-.topbar a {
-  display: block;
-  padding: 1rem;
-  color: #293039;
-  transition: background 0.3s ease;
-}
-.topbar a:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.navigation {
-  background: #3d4756;
-}
-.navigation a {
-  display: block;
-  padding: 0.5rem 1rem;
-  color: #bcbfc5;
-  transition: color 0.3s ease, background 0.3s ease;
-}
-.navigation a:hover, .navigation a.active {
-  text-decoration: none;
-  color: #fff;
-  background: #526476;
-}
-.navigation a:hover .fas,
-.navigation a:hover .far, .navigation a.active .fas,
-.navigation a.active .far {
-  color: #fff;
-}
-.navigation a .fas,
-.navigation a .far {
-  color: #b3c1d1;
-  transition: color 0.3s ease;
-  margin-right: 0.5rem;
-}
-
-.main {
-  flex: 1;
-  padding: 1rem;
-}
-
-@media (min-width: 768px) {
-  .main {
-    padding: 3rem;
-  }
-
-  .navigation {
-    height: 100%;
-    padding-top: 3rem;
-  }
-}
 @media (min-width: 992px) {
   .card.card-default.card-table .card-body .row > div[data-title] {
     display: block;

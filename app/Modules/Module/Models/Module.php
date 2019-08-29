@@ -5,6 +5,7 @@ namespace psnXT\Modules\Module\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use psnXT\Modules\User\Models\User;
+use psnXT\Traits\Tenant;
 
 /**
  * Class Module
@@ -26,6 +27,8 @@ use psnXT\Modules\User\Models\User;
  */
 class Module extends Model
 {
+    use Tenant;
+
     /**
      * @var bool
      */

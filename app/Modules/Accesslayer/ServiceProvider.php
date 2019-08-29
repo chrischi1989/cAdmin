@@ -13,6 +13,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/module.php');
 
+        $this->loadMigrationsFrom(__DIR__ . '/Data/Migrations');
+
         $this->loadViewsFrom(__DIR__ . '/UI/Web/Views', 'accesslayer');
     }
 }

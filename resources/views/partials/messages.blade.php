@@ -1,20 +1,20 @@
 @if(session()->has('success'))
-<div class="alert alert-success alert-lg-aside text-center text-lg-left">
+<div class="alert alert-success{{ !isset($block) ? ' alert-lg-aside text-center' : null }}">
     {{ session('success') }}
 </div>
 @endif
 @if(session()->has('error'))
-<div class="alert alert-danger alert-aside text-center text-lg-left">
+<div class="alert alert-danger{{ !isset($block) ? ' alert-lg-aside text-center' : null }}">
     {{ session('error') }}
 </div>
 @endif
 @if(session()->has('warning'))
-<div class="alert alert-warning alert-aside text-center text-lg-left">
+<div class="alert alert-warning{{ !isset($block) ? ' alert-lg-aside text-center' : null }}">
     {{ session('warning') }}
 </div>
 @endif
 @if(session()->has('info'))
-<div class="alert alert-info alert-aside text-center text-lg-left">
+<div class="alert alert-info{{ !isset($block) ? ' alert-lg-aside text-center' : null }}">
     {{ session('info') }}
 </div>
 @endif
