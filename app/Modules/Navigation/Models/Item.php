@@ -3,6 +3,7 @@
 namespace psnXT\Modules\Navigation\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use psnXT\Modules\Module\Models\Module;
 use psnXT\Traits\Tenant;
 
 class Item extends Model
@@ -12,6 +13,14 @@ class Item extends Model
     public $incrementing  = false;
     protected $table      = 'navigation';
     protected $primaryKey = 'uuid';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function module()
+    {
+        return $this->hasOne(Module::class, 'uuid', 'module_uuid');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

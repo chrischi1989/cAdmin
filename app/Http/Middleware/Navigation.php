@@ -16,7 +16,7 @@ class Navigation
      */
     public function handle($request, Closure $next)
     {
-        $items = Item::with(['childItems'])->whereNull('parent_uuid')->orderBy('position')->get();
+        $items = Item::with(['childItems.module'])->whereNull('parent_uuid')->orderBy('position')->get();
 
         view()->share('navigationsItems', $items);
 

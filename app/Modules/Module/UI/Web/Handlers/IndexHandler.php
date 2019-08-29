@@ -2,15 +2,20 @@
 
 namespace psnXT\Modules\Module\UI\Web\Handlers;
 
-class IndexHandler
+use psnXT\Controller;
+use psnXT\Modules\Module\Models\Module;
+
+class IndexHandler extends Controller
 {
     public function __construct()
     {
-
+        view()->share('active', 'modules');
     }
 
     public function __invoke()
     {
-        return 'Module Module';
+        $this->authorize('show', Module::class);
+
+        return view('module::index');
     }
 }

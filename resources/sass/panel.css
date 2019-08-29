@@ -59,29 +59,33 @@ html, body, .wrapper {
 .navigation > nav > ul li > ul {
   display: none;
 }
-.navigation > nav > ul li:hover {
+.navigation > nav > ul li:hover, .navigation > nav > ul li.active {
   background: #eff1f4;
   cursor: pointer;
 }
 .navigation > nav > ul li:hover a,
-.navigation > nav > ul li:hover span {
+.navigation > nav > ul li:hover span, .navigation > nav > ul li.active a,
+.navigation > nav > ul li.active span {
   color: #26425f;
+}
+.navigation > nav > ul li a {
+  display: block;
 }
 .navigation .hide {
   display: none;
 }
-.navigation #back:not(.hide) {
+.navigation #back {
   display: block;
-  padding: 0.75rem 0 0.75rem 2rem;
+  padding: 0.75rem 0 0.75rem 1.75rem;
   font-weight: 700;
   font-size: 1.5rem;
   transition: background 0.3s ease;
 }
-.navigation #back:not(.hide):hover {
+.navigation #back:not(.empty):hover {
   color: #26425f;
   background: #eff1f4;
   cursor: pointer;
 }
-.navigation #back:not(.hide):hover span {
+.navigation #back:not(.empty):hover span {
   color: #26425f;
 }

@@ -65,13 +65,18 @@ html, body, .wrapper {
                 > ul {
                     display:none;
                 }
-                &:hover {
+                &:hover,
+                &.active {
                     background:#eff1f4;
                     cursor: pointer;
                     a,
                     span {
                         color:#26425f;
                     }
+                }
+
+                a {
+                    display:block;
                 }
             }
         }
@@ -81,13 +86,13 @@ html, body, .wrapper {
         display:none;
     }
 
-    #back:not(.hide) {
+    #back {
         display:block;
-        padding:.75rem 0 .75rem 2rem;
+        padding:.75rem 0 .75rem 1.75rem;
         font-weight: 700;
         font-size: 1.5rem;
         transition:background .3s ease;
-        &:hover {
+        &:not(.empty):hover {
             color:#26425f;
             background:#eff1f4;
             cursor: pointer;

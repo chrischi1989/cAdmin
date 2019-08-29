@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use psnXT\Modules\Dashboard\Models\Dashboard;
 use psnXT\Modules\Dashboard\Policies\DashboardPolicy;
+use psnXT\Modules\Dashboard\Policies\UserPolicy;
 
 class ServiceProvider extends BaseServiceProvider
 {

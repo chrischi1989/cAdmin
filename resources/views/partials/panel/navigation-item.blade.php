@@ -1,8 +1,10 @@
 @if(!is_null($item->module))
-@if(isset($currentUser->permissions->{strtolower($item->module->module)}, $currentUser->permissions->{strtolower($item->module->module)}->read))
-<li>
+@if(Arr::has($currentUser->permissions, strtolower($item->module->module) . '.show'))
+<li{!! isset($active) && strtolower($item->module->module) == $active ? ' class="active"' : null !!}>
     @if(!$item->childItems->isEmpty())
-    <span data-backhtml="<span class='fas fa-angle-left fa-fw'></span> {{ $item->title }}">{{ $item->title }}</span>
+    <span data-backhtml="<span class='fas fa-angle-left fa-fw mr-0'></span> {{ $item->title }}">
+        <span class="{{ $item->icon }} fa-fw"></span> {{ $item->title }} <span class="fas fa-angle-right fa-fw"></span>
+    </span>
     <ul>
         @each('partials.panel.navigation-item', $item->childItems, 'item')
     </ul>
@@ -16,7 +18,7 @@
 @else
 <li>
     @if(!$item->childItems->isEmpty())
-    <span data-backhtml="<span class='fas fa-angle-left fa-fw'></span> {{ $item->title }} ">
+    <span data-backhtml="<span class='fas fa-angle-left fa-fw mr-0'></span> {{ $item->title }} ">
         <span class="{{ $item->icon }} fa-fw"></span> {{ $item->title }} <span class="fas fa-angle-right fa-fw"></span>
     </span>
     <ul>

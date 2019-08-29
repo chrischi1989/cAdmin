@@ -2,10 +2,20 @@
 
 namespace psnXT\Modules\Setting\UI\Web\Handlers;
 
-class IndexHandler
+use psnXT\Controller;
+use psnXT\Modules\Setting\Models\Setting;
+
+class IndexHandler extends Controller
 {
+    public function __construct()
+    {
+        view()->share('active', 'settings');
+    }
+
     public function __invoke()
     {
-        return 'Setting Module';
+        $this->authorize('show', Setting::class);
+
+        return view('setting::index');
     }
 }

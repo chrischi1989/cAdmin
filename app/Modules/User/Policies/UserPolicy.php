@@ -1,12 +1,12 @@
 <?php
 
-namespace psnXT\Modules\Dashboard\Policies;
+namespace psnXT\Modules\User\Policies;
 
 use Arr;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use psnXT\Modules\User\Models\User;
 
-class DashboardPolicy
+class UserPolicy
 {
     use HandlesAuthorization;
 
@@ -15,6 +15,6 @@ class DashboardPolicy
         /** @var User $user */
         $user = $arguments[0];
 
-        return Arr::has($user->permissions, 'dashboard.' . $permission);
+        return Arr::has($user->permissions, 'user.' . $permission);
     }
 }

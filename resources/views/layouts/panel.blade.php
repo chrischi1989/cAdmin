@@ -40,7 +40,9 @@
             <div class="row main">
                 <div class="col-12 col-lg-2 navigation">
                     <nav>
-                        <span id="back">Menü</span>
+                        <span id="back" class="empty">
+                            <span class="fas fa-bars fa-fw mr-0"></span> Menü
+                        </span>
                         <ul>
                             @each('partials.panel.navigation-item', $navigationsItems, 'item')
                         </ul>
@@ -55,55 +57,7 @@
 
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-        <script>
-            var $history   = [];
-            var $backTexts = [];
-            var $current   = null;
-            var $previous  = null;
-
-            $(document).ready(function() {
-                $('body').on('click', '.navigation nav ul li', function($event) {
-                    if($(this).find('ul').length > 0) {
-                        $history.push($(this).parent().clone(true));
-                        $backTexts.push($(this).find('span[data-backhtml]').data('backhtml'));
-                        $current = $(this).children('ul');
-                        $(this).parent().remove();
-                        $('.navigation nav').append($current);
-
-                        if($history.length > 0) {
-                            $('#back').html($(this).find('span[data-backhtml]').data('backhtml'));
-                            //document.querySelector('#back').classList.remove('hide');
-                        } else {
-                            //document.querySelector('#back').classList.add('hide');
-                        }
-                    }
-                });
-
-                $('body').on('click', '#back', function() {
-                    console.log($history.length);
-                    if($history.length > 0) {
-                        $backTexts.pop();
-                        $previous = $history.pop();
-                        $current.remove();
-                        $current = $previous;
-                        $('.navigation nav').append($previous);
-
-
-                        $('#back').html($backTexts.pop());
-                        //document.querySelector('#back').classList.remove('hide');
-                    } else {
-                        $history   = [];
-                        $backTexts = [];
-                        $current   = null;
-                        $previous  = null;
-
-                        $('#back').html('Menü');
-                        //document.querySelector('#back').classList.add('hide');
-                    }
-                });
-            });
-        </script>
-        <script src="{{ asset('js/navigation.js') }}"></script>
+        <script src="{{ asset('js/navigation.min.js') }}"></script>
         @yield('pagejs')
 
     </body>

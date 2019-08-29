@@ -96,7 +96,7 @@ a {
 }
 
 .form-control {
-  border: none;
+  border: 1px solid #b9c9d5;
   border-radius: 0.5rem;
 }
 .form-control:disabled, .form-control[readonly] {
@@ -105,6 +105,15 @@ a {
 .form-control::placeholder {
   font-family: "Nunito", "Font Awesome 5 Free", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 400;
+}
+.form-control.shadow {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+.form-control.is-invalid {
+  border-color: #f44336;
+}
+.form-control:focus {
+  box-shadow: none;
 }
 
 .col-form-label {
@@ -234,17 +243,12 @@ a {
 .card.card-default .card-body {
   padding: 1rem;
 }
-.card.card-default .card-body .form-control {
-  border: 1px solid #b9c9d5;
+.card.card-default .card-header {
+  background: #f4f6fa;
+  border-bottom: 2px solid #e3e6eb;
 }
-.card.card-default .card-body .form-control.shadow {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
-}
-.card.card-default .card-body .form-control.is-invalid {
-  border-color: #f44336;
-}
-.card.card-default .card-body .form-control:focus {
-  box-shadow: none;
+.card.card-default .card-header:first-child {
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 @media (min-width: 992px) {

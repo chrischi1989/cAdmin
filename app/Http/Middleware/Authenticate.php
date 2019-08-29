@@ -33,6 +33,7 @@ class Authenticate extends Middleware
         }
 
         $request->user()->permissions = $permissions;
+        view()->share('currentUser', $request->user());
 
         return $next($request);
     }
