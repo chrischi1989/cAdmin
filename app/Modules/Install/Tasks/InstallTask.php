@@ -3,6 +3,7 @@
 namespace psnXT\Modules\Install\Tasks;
 
 use Artisan;
+use DB;
 
 /**
  * Class InstallTask
@@ -11,14 +12,22 @@ use Artisan;
 class InstallTask
 {
     /**
-     * @param array $settings
      * @return bool
      */
-    public function run($settings = [])
+    public function run()
     {
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
         Artisan::call('key:generate');
         Artisan::call('storage:link');
 
-        return true;
+        DB::purge();
+        DB::reconnect();
+
+        Artisan::call('migrate');
+
+        file_put_contents(base_path() . '/install.lock', '');
+
+        return file_exists(base_path() . '/install.lock');
     }
 }

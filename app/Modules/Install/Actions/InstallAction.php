@@ -5,8 +5,6 @@ namespace psnXT\Modules\Install\Actions;
 use psnXT\Helpers;
 use psnXT\Modules\Install\Tasks\InstallTask;
 use psnXT\Modules\Install\Tasks\SeedTablesTask;
-use psnXT\Modules\Install\Tasks\LockInstallerTask;
-use psnXT\Modules\Install\Tasks\MigrateTablesTask;
 use psnXT\Modules\Install\Tasks\SendInstallationMailTask;
 use psnXT\Modules\Install\UI\Web\Requests\Install;
 use psnXT\Modules\Setting\Tasks\UpdateEnvTask;
@@ -23,10 +21,6 @@ class InstallAction
      */
     private $updateEnvTask;
     /**
-     * @var MigrateTablesTask
-     */
-    private $migrateTablesTask;
-    /**
      * @var SeedTablesTask
      */
     private $seedTablesTask;
@@ -38,34 +32,24 @@ class InstallAction
      * @var SendInstallationMailTask
      */
     private $sendInstallationMailTask;
-    /**
-     * @var LockInstallerTask
-     */
-    private $lockInstallerTask;
 
     /**
      * InstallAction constructor.
      * @param UpdateEnvTask $updateEnvTask
-     * @param MigrateTablesTask $migrateTablesTask
      * @param SeedTablesTask $seedTablesTask
      * @param InstallTask $installTask
      * @param SendInstallationMailTask $sendInstallationMailTask
-     * @param LockInstallerTask $lockInstallerTask
      */
     public function __construct(
         UpdateEnvTask $updateEnvTask,
-        MigrateTablesTask $migrateTablesTask,
         SeedTablesTask $seedTablesTask,
         InstallTask $installTask,
-        SendInstallationMailTask $sendInstallationMailTask,
-        LockInstallerTask $lockInstallerTask
+        SendInstallationMailTask $sendInstallationMailTask
     ) {
         $this->updateEnvTask            = $updateEnvTask;
-        $this->migrateTablesTask        = $migrateTablesTask;
         $this->seedTablesTask           = $seedTablesTask;
         $this->installTask              = $installTask;
         $this->sendInstallationMailTask = $sendInstallationMailTask;
-        $this->lockInstallerTask        = $lockInstallerTask;
     }
 
     /**
@@ -95,10 +79,8 @@ class InstallAction
 
         if($this->updateEnvTask->run($envData)) {
             return $this->installTask->run() &&
-                   $this->migrateTablesTask->run() &&
-                   $this->seedTablesTask->run() &&
+                   $this->seedTablesTask->run();
                    //$this->sendInstallationMailTask->run($request->post('email')) &&
-                   $this->lockInstallerTask->run();
         }
 
         return false;

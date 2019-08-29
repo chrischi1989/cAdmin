@@ -7,9 +7,6 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/fontawesome.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-overrides.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/panel.min.css') }}">
-        <style>
-
-        </style>
         @yield('pagecss')
         <title>{{ env('APP_NAME') }} :: @yield('pagetitle')</title>
     </head>
@@ -106,6 +103,7 @@
                 });
             });
         </script>
+        <script src="{{ asset('js/navigation.js') }}"></script>
         @yield('pagejs')
 
     </body>

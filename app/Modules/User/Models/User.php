@@ -3,10 +3,10 @@
 namespace psnXT\Modules\User\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Collection;
 use psnXT\Modules\Accesslayer\Models\Layer;
 use psnXT\Traits\Tenant;
 
@@ -37,6 +37,9 @@ use psnXT\Traits\Tenant;
  * @property int $failed_logins_max
  * @property boolean $password_expires
  * @property int $password_expires_days
+ * @property Collection $accesslayer
+ * @property Profile $profile
+ * @property PasswordReset $passwordReset
  * @property Collection $permissions
  *
  * @package psnXT\Modules\User\Models

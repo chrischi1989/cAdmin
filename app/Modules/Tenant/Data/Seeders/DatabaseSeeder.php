@@ -2,7 +2,12 @@
 
 namespace psnXT\Modules\Tenant\Data\Seeders;
 
-class DatabaseSeeder
-{
+use Illuminate\Database\Seeder;
 
+class DatabaseSeeder extends Seeder
+{
+    public function run()
+    {
+
+    }
 }

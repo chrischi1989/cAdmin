@@ -10,12 +10,11 @@ class DashboardPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * @param User $user
-     * @return bool
-     */
-    public function show(User $user)
+    public function __call($permission, $arguments)
     {
-        return Arr::has($user->permissions, 'dashboard.show');
+        /** @var User $user */
+        $user = $arguments[0];
+
+        return Arr::has($user->permissions, 'accesslayer.' . $permission);
     }
 }
