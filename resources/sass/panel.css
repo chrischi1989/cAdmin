@@ -1,0 +1,87 @@
+html, body, .wrapper {
+  height: 100%;
+}
+
+.header {
+  background: #ffffff;
+}
+.header .header-left {
+  background: #272d36;
+  padding: 0.5rem 2rem;
+}
+.header .header-right {
+  padding: 1rem;
+}
+.header .branding h1 {
+  margin-bottom: 0;
+  font-size: 2rem;
+}
+.header .branding h1 a {
+  color: #ffffff;
+}
+.header .branding h1 a:hover {
+  text-decoration: none;
+}
+
+.main {
+  height: 100%;
+}
+
+.navigation {
+  height: 100%;
+  background: linear-gradient(to bottom, #3f4855 0%, #606a7a 100%);
+  color: #ffffff;
+  padding-top: 2rem;
+}
+.navigation .fas, .navigation .far {
+  color: #b6c1d0;
+  margin-right: 0.5rem;
+}
+.navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navigation a {
+  color: #ffffff;
+}
+.navigation a:hover {
+  text-decoration: none;
+  color: #26425f;
+}
+.navigation > nav {
+  margin: 0 -1rem;
+}
+.navigation > nav > ul li {
+  padding: 0.75rem 0 0.75rem 2rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.navigation > nav > ul li > ul {
+  display: none;
+}
+.navigation > nav > ul li:hover {
+  background: #eff1f4;
+  cursor: pointer;
+}
+.navigation > nav > ul li:hover a,
+.navigation > nav > ul li:hover span {
+  color: #26425f;
+}
+.navigation .hide {
+  display: none;
+}
+.navigation #back:not(.hide) {
+  display: block;
+  padding: 0.75rem 0 0.75rem 2rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  transition: background 0.3s ease;
+}
+.navigation #back:not(.hide):hover {
+  color: #26425f;
+  background: #eff1f4;
+  cursor: pointer;
+}
+.navigation #back:not(.hide):hover span {
+  color: #26425f;
+}
