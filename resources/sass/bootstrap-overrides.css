@@ -251,6 +251,10 @@ a {
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
+.breadcrumb {
+  background: none;
+}
+
 @media (min-width: 992px) {
   .card.card-default.card-table .card-body .row > div[data-title] {
     display: block;
