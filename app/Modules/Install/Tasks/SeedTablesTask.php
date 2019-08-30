@@ -23,7 +23,7 @@ class SeedTablesTask
             'Setting',
             'Tenant',
             'User',
-            'Accesslaser'
+            'Accesslayer'
         ];
 
         foreach($seedOrder as $module) {
