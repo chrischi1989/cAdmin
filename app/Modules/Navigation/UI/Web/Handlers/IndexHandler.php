@@ -2,20 +2,21 @@
 
 namespace psnXT\Modules\Navigation\UI\Web\Handlers;
 
-use psnXT\Controller;
-use psnXT\Modules\Navigation\Models\Item;
+use psnXT\Modules\Navigation\Actions\IndexAction;
 
-class IndexHandler extends Controller
+class IndexHandler
 {
-    public function __construct()
+    private $indexAction;
+
+    public function __construct(IndexAction $indexAction)
     {
-        view()->share('active', 'navigation');
+        $this->indexAction = $indexAction;
     }
 
     public function __invoke()
     {
-        $this->authorize('show', Item::class);
+        $items = $this->indexAction->run();
 
-        return view('navigation::index');
+        return view('navigation::index', ['items' => $items]);
     }
 }
