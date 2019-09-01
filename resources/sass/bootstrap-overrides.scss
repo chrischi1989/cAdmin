@@ -67,6 +67,7 @@ body {
 
 a {
     color:#4198dc;
+    transition:color .3s ease;
 }
 
 .alert {
@@ -91,20 +92,6 @@ a {
 .alert-danger {
     background: #f44336;
     color: #fff
-}
-
-.alert-aside {
-    position: absolute;
-    right: 0;
-    top: 10vh;
-    z-index: 100;
-    border-radius: .6rem 0 0 .6rem;
-    &.slideHide {
-        animation: slideInFromRight 6s ease 0s 1 normal forwards
-    }
-    &.slideStay {
-        animation: slideInFromRightStay 1s ease 0s 1 normal forwards
-    }
 }
 
 .form-control {
@@ -314,6 +301,37 @@ a {
             }
         }
     }
+
+    .alert-lg-aside-left,
+    .alert-lg-aside-right {
+        position: absolute;
+        top: 1.3rem;
+        z-index: 80;
+    }
+
+    .alert-lg-aside-left {
+        position: absolute;
+        left: 0;
+        border-radius: 0 .6rem .6rem 0;
+        &.slideHide {
+            animation: slideInFromLeft 6s ease 0s 1 normal forwards
+        }
+        &.slideStay {
+            animation: slideInFromLeftStay 1s ease 0s 1 normal forwards
+        }
+    }
+
+    .alert-lg-aside-right {
+        position: absolute;
+        right: 0;
+        border-radius: .6rem 0 0 .6rem;
+        &.slideHide {
+            animation: slideInFromRight 6s ease 0s 1 normal forwards
+        }
+        &.slideStay {
+            animation: slideInFromRightStay 1s ease 0s 1 normal forwards
+        }
+    }
 }
 
 @media(min-width: 125em) {
@@ -335,11 +353,35 @@ a {
      100% {
          transform: translateX(100%)
      }
- }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%)
+    }
+    16.6666667% {
+        transform: translateX(0)
+    }
+    83.3333333% {
+        transform: translateX(0)
+    }
+    100% {
+        transform: translateX(-100%)
+    }
+}
 
 @keyframes slideInFromRightStay {
     0% {
         transform: translateX(100%)
+    }
+    100% {
+        transform: translateX(0)
+    }
+}
+
+@keyframes slideInFromLeftStay {
+    0% {
+        transform: translateX(-100%)
     }
     100% {
         transform: translateX(0)
