@@ -29,6 +29,7 @@ Route::group([
         Route::post('delete', DeleteHandler::class)->name('user-delete');
         Route::get('profile', ProfilePageHandler::class)->name('user-profile-page');
         Route::post('profile', ProfileHandler::class)->name('user-profile');
+        Route::get('xhr/current', XhrCurrentUserHandler::class)->name('user-current');
         Route::get('unauthorized', UnauthorizedPageHandler::class)->name('user-unauthorized');
     });
 });
