@@ -23,5 +23,7 @@ class ServiceProvider extends BaseServiceProvider
         $this->loadViewsFrom(__DIR__ . '/UI/Web/Views', 'setting');
 
         $gate->policy(Setting::class, SettingPolicy::class);
+
+        $this->mergeConfigFrom(__DIR__ . '/config.php', 'setting');
     }
 }
