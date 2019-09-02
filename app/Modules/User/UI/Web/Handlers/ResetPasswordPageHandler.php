@@ -16,7 +16,7 @@ class ResetPasswordPageHandler
 
     public function __invoke(ResetPasswordPageRequest $request, $token)
     {
-        $result = $this->resetPasswordPageAction->run($token);
+        $this->resetPasswordPageAction->run($token);
 
         return view('User.UI.Web.Views.reset-password', [
             'token' => $token
