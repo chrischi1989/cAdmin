@@ -14,18 +14,18 @@ class Authenticate extends Middleware
         $container   = [];
         $currentUser = $request->user()->load(['accesslayer.permissions.module', 'profile']);
 
-        foreach($currentUser->accesslayer as $layer) {
+        foreach ($currentUser->accesslayer as $layer) {
             $request->user()->priority = $layer->priority > $request->user()->priority ? $layer->priority : $request->user()->priority;
-            foreach($layer->permissions as $permission) {
+            foreach ($layer->permissions as $permission) {
                 $module = strtolower($permission->module->module);
                 $container[$module][] = $permission->permission;
             }
         }
 
         $permissions = collect();
-        foreach($container as $module => $set) {
+        foreach ($container as $module => $set) {
             $modulePermissions = collect();
-            foreach($set as $index => $value) {
+            foreach ($set as $index => $value) {
                 $modulePermissions->put($value, true);
             }
 
@@ -46,7 +46,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
+        if (!$request->expectsJson()) {
             return route('user-login-page');
         }
     }

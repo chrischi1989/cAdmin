@@ -60,7 +60,7 @@ abstract class Helpers
 
         foreach ($array as $key => $value) {
             // Ignore empty cells
-            if($value || is_numeric($value)) {
+            if ($value || is_numeric($value)) {
                 // Use recursion to evaluate cells
                 $non_empty_items[$key] = self::array_filter_deep($value);
             }

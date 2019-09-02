@@ -13,8 +13,8 @@ trait Uuids
     {
         parent::boot();
 
-        static::creating(function ($model) {
-            if(!isset($model->attributes['uuid'])) {
+        static::creating(function($model) {
+            if (!isset($model->attributes['uuid'])) {
                 $model->{$model->getKeyName()} = Uuid::uuid4();
             }
         });

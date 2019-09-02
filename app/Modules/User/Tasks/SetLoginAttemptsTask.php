@@ -12,12 +12,12 @@ class SetLoginAttemptsTask
             'login_last_attempt' => now()
         ]);
 
-        if(!$user instanceof User) {
+        if (!$user instanceof User) {
             return true;
         }
 
-        if($user->failed_logins + 1 > $user->failed_logins_max) {
-            if(!is_null($user->deactivated_at)) {
+        if ($user->failed_logins + 1 > $user->failed_logins_max) {
+            if (!is_null($user->deactivated_at)) {
                 return true;
             }
 

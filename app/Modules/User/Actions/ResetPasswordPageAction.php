@@ -31,7 +31,7 @@ class ResetPasswordPageAction
     public function run($token)
     {
         $passwordReset = $this->findPasswordResetTask->byToken($token);
-        if(now() > $passwordReset->token_until) {
+        if (now() > $passwordReset->token_until) {
             return false;
         }
 

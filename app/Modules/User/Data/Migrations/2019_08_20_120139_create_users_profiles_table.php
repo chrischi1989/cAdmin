@@ -13,7 +13,7 @@ class CreateUsersProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_profiles', function (Blueprint $table) {
+        Schema::create('users_profiles', function(Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->char('uuid', 36);
             $table->char('user_uuid', 36);

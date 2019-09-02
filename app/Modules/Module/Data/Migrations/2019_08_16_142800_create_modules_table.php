@@ -13,7 +13,7 @@ class CreateModulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('modules', function (Blueprint $table) {
+        Schema::create('modules', function(Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36);
             $table->datetime('created_at');

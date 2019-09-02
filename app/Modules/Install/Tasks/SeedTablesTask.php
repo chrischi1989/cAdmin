@@ -26,8 +26,8 @@ class SeedTablesTask
             'Accesslayer'
         ];
 
-        foreach($seedOrder as $module) {
-            if(file_exists(app_path('Modules/' . $module . '/Data/Seeders/DatabaseSeeder.php'))) {
+        foreach ($seedOrder as $module) {
+            if (file_exists(app_path('Modules/' . $module . '/Data/Seeders/DatabaseSeeder.php'))) {
                 Artisan::call('db:seed', ['--class' => 'psnXT\Modules\\' . $module . '\Data\Seeders\DatabaseSeeder']);
             }
         }

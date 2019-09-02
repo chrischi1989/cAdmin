@@ -54,7 +54,7 @@ class ResetPasswordAction
 
         $data = ['password' => Hash::make($request->post('password'))];
 
-        if(!$this->updateUserTask->run($passwordReset->user, $data)) {
+        if (!$this->updateUserTask->run($passwordReset->user, $data)) {
             return false;
         }
 

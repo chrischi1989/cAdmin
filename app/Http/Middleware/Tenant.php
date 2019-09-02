@@ -17,18 +17,18 @@ class Tenant
      */
     public function handle($request, Closure $next)
     {
-        if(session()->has('connection')) {
+        if (session()->has('connection')) {
             $database = DB::connection('mysql')->table('tenants_databases')->where('uuid', session('connection'))->get()->first();
         } else {
-            if(auth()->check()) {
+            if (auth()->check()) {
                 $user = auth()->user();
-                if(!is_null($user->tenant_uuid)) {
+                if (!is_null($user->tenant_uuid)) {
                     $database = DB::connection('mysql')->table('tenants_databases')->where('tenant_uuid', $user->tenant_uuid)->get()->first();
                 }
             }
         }
 
-        if(isset($database)) {
+        if (isset($database)) {
             config(['database.connections.' . $database->uuid => [
                 'driver' => 'mysql',
                 'url' => env('DATABASE_URL'),
