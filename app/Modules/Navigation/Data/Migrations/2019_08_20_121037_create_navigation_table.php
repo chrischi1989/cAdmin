@@ -13,7 +13,7 @@ class CreateNavigationTable extends Migration
      */
     public function up()
     {
-        Schema::create('navigation', function (Blueprint $table) {
+        Schema::create('navigation', function(Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->char('uuid', 36);
             $table->char('parent_uuid', 36)->nullable();

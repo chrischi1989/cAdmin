@@ -13,7 +13,7 @@ class CreateAccesslayerTable extends Migration
      */
     public function up()
     {
-        Schema::create('accesslayer', function (Blueprint $table) {
+        Schema::create('accesslayer', function(Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36);
             $table->dateTime('created_at');

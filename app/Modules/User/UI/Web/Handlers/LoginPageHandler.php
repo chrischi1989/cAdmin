@@ -24,7 +24,7 @@ class LoginPageHandler
      */
     public function __invoke(Request $request)
     {
-        if(!$this->loginPageAction->run()) {
+        if (!$this->loginPageAction->run()) {
             return view('user::login', [
                 'loginDelay' => session()->has('login_attempts') ? session('login_delay') - now()->diffInSeconds(session('login_last_attempt')) : 0
             ]);

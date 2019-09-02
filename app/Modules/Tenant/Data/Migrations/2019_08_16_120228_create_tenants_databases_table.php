@@ -13,7 +13,7 @@ class CreateTenantsDatabasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tenants_databases', function (Blueprint $table) {
+        Schema::create('tenants_databases', function(Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36);
             $table->char('tenant_uuid', 36);

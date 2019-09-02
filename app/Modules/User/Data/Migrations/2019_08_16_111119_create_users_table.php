@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function(Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->char('uuid', 36);
             $table->char('tenant_uuid', 36)->nullable();

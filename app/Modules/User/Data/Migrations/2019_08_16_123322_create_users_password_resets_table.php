@@ -13,7 +13,7 @@ class CreateUsersPasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_password_resets', function (Blueprint $table) {
+        Schema::create('users_password_resets', function(Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->char('uuid', 36);
             $table->char('user_uuid', 36);
