@@ -15,7 +15,7 @@ class GetAvailableRoutesTask
      */
     public function run()
     {
-        $availableRoutes = collect(Route::getRoutes())->filter(function ($route) {
+        $availableRoutes = collect(Route::getRoutes())->filter(function($route) {
             return strpos($route->uri, '_debugbar') === false &&
             strpos($route->uri, 'captcha') === false &&
             strpos($route->uri, '{') === false &&

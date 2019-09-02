@@ -77,10 +77,10 @@ class InstallAction
             'DB_PASSWORD'   => $request->post('DB_PASSWORD'),
         ];
 
-        if($this->updateEnvTask->run($envData)) {
+        if ($this->updateEnvTask->run($envData)) {
             return $this->installTask->run() &&
                    $this->seedTablesTask->run();
-                   //$this->sendInstallationMailTask->run($request->post('email')) &&
+                    //$this->sendInstallationMailTask->run($request->post('email')) &&
         }
 
         return false;

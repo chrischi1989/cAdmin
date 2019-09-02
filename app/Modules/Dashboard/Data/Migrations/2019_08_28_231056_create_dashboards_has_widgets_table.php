@@ -13,7 +13,7 @@ class CreateDashboardsHasWidgetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('dashboards_has_widgets', function (Blueprint $table) {
+        Schema::create('dashboards_has_widgets', function(Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->char('uuid', 36);
             $table->char('dashboard_uuid', 36);

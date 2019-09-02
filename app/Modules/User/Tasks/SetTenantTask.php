@@ -10,7 +10,7 @@ class SetTenantTask
 {
     public function run(User $user)
     {
-        if(is_null($user->tenant_uuid)) return true;
+        if (is_null($user->tenant_uuid)) return true;
 
         $database = DB::connection('mysql')->table('tenants_databases')->where('tenant_uuid', $user->tenant_uuid)->get()->first();
         config(['database.connections.' . $database->uuid => [

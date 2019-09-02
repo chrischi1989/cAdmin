@@ -19,7 +19,7 @@ Route::group([
             'tenant',
             'navigation'
         ]
-    ], function () {
+    ], function() {
         Route::get('/', IndexHandler::class)->name('user-index');
         Route::post('logout', LogoutHandler::class)->name('user-logout');
         Route::get('create', CreateHandler::class)->name('user-create');
