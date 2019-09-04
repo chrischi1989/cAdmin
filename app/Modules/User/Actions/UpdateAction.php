@@ -2,112 +2,103 @@
 
 namespace psnXT\Modules\User\Actions;
 
+use Str;
+use psnXT\Modules\User\Tasks\UpdateUserAccesslayerTask;
+use psnXT\Modules\User\Tasks\UpdateUserProfileTask;
+use psnXT\Modules\User\UI\Web\Requests\UpdateRequest;
 use psnXT\Modules\User\Models\User;
 use psnXT\Modules\User\Tasks\AuthorizeActionTask;
 use psnXT\Modules\User\Tasks\FindUserTask;
-use psnXT\Modules\User\Tasks\SendCredentialEmailTask;
-use psnXT\Modules\User\Tasks\StoreUserProfileTask;
-use psnXT\Modules\User\Tasks\StoreUserTask;
-use psnXT\Modules\User\Tasks\UpdateUserAccesslayerTask;
+use psnXT\Modules\User\Tasks\UpdateUserTask;
 use psnXT\Modules\User\UI\Web\Requests\StoreRequest;
-use Str;
 
 /**
- * Class StoreAction
+ * Class UpdateAction
  * @package psnXT\Modules\User\Actions
  */
-class StoreAction
+class UpdateAction
 {
     /**
      * @var FindUserTask
      */
     private $findUserTask;
     /**
-     * @var StoreUserTask
+     * @var UpdateUserTask
      */
-    private $storeUserTask;
+    private $updateUserTask;
     /**
-     * @var StoreUserProfileTask
+     * @var UpdateUserProfileTask
      */
-    private $storeUserProfileTask;
+    private $updateUserProfileTask;
     /**
      * @var UpdateUserAccesslayerTask
      */
     private $updateUserAccesslayerTask;
-    /**
-     * @var SendCredentialEmailTask
-     */
-    private $sendCredentialEmailTask;
     /**
      * @var AuthorizeActionTask
      */
     private $authorizeActionTask;
 
     /**
-     * StoreAction constructor.
+     * UpdateAction constructor.
      * @param FindUserTask $findUserTask
-     * @param StoreUserTask $storeUserTask
-     * @param StoreUserProfileTask $storeUserProfileTask
+     * @param UpdateUserTask $updateUserTask
+     * @param UpdateUserProfileTask $updateUserProfileTask
      * @param UpdateUserAccesslayerTask $updateUserAccesslayerTask
-     * @param SendCredentialEmailTask $sendCredentialEmailTask
      * @param AuthorizeActionTask $authorizeActionTask
      */
     public function __construct(
         FindUserTask $findUserTask,
-        StoreUserTask $storeUserTask,
-        StoreUserProfileTask $storeUserProfileTask,
+        UpdateUserTask $updateUserTask,
+        UpdateUserProfileTask $updateUserProfileTask,
         UpdateUserAccesslayerTask $updateUserAccesslayerTask,
-        SendCredentialEmailTask $sendCredentialEmailTask,
         AuthorizeActionTask $authorizeActionTask
     ) {
         $this->findUserTask              = $findUserTask;
-        $this->storeUserTask             = $storeUserTask;
-        $this->storeUserProfileTask      = $storeUserProfileTask;
+        $this->updateUserTask            = $updateUserTask;
+        $this->updateUserProfileTask     = $updateUserProfileTask;
         $this->updateUserAccesslayerTask = $updateUserAccesslayerTask;
-        $this->sendCredentialEmailTask   = $sendCredentialEmailTask;
         $this->authorizeActionTask       = $authorizeActionTask;
-
     }
 
     /**
-     * @param StoreRequest $request
-     * @return bool|mixed
+     * @param UpdateRequest $request
+     * @return bool
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function run(StoreRequest $request)
+    public function run(UpdateRequest $request)
     {
-        $this->authorizeActionTask->run('create', User::class);
-        $userData = $this->prepareUserData($request);
+        $this->authorizeActionTask->run('edit', User::class);
 
-        if (!$this->storeUserTask->run($userData)) {
+        $user                = $this->findUserTask->byUuid($request->post('uuid'), ['profile']);
+        $userData            = $this->prepareUserData($request);
+        $userProfileData     = $this->prepareUserProfileData($request);
+        $userAccesslayerData = $this->prepareAccesslayerData($request);
+
+        if (!$this->updateUserTask->run($user, $userData)) {
             return false;
         }
 
-        $user = $this->findUserTask->byEmail($userData['email']);
-        if (!$this->storeUserProfileTask->run($this->prepareUserProfileData($request, $user))) {
+        if (!$this->updateUserProfileTask->run($user->profile, $userProfileData)) {
             return false;
         }
 
-        if (!$this->updateUserAccesslayerTask->run($user, $request->post('accesslayer'),
-            $this->prepareAccesslayerData($request))) {
+        if (!$this->updateUserAccesslayerTask->run($user, $request->post('accesslayer'), $userAccesslayerData)) {
             return false;
         }
 
-        return $request->has('senddata') ? $this->sendCredentialEmailTask->run($user) : true;
+        return true;
     }
 
     /**
-     * @param StoreRequest $request
+     * @param UpdateRequest $request
      * @return array
      */
-    private function prepareUserData(StoreRequest $request)
+    private function prepareUserData(UpdateRequest $request)
     {
         return [
             'tenant_uuid'           => $request->post('tenant'),
-            'created_uuid'          => $request->user()->uuid,
             'updated_uuid'          => $request->user()->uuid,
-            'activated_at'          => !$request->has('disabled') ? now() : null,
-            'activated_uuid'        => !$request->has('disabled') ? $request->user()->uuid : null,
             'deactivated_at'        => $request->has('disabled') ? now() : null,
             'deactivated_uuid'      => $request->has('disabled') ? $request->user()->uuid : null,
             'email'                 => $request->post('email'),
@@ -120,15 +111,12 @@ class StoreAction
     }
 
     /**
-     * @param StoreRequest $request
-     * @param User $user
+     * @param UpdateRequest $request
      * @return array
      */
-    private function prepareUserProfileData(StoreRequest $request, User $user)
+    private function prepareUserProfileData(UpdateRequest $request)
     {
         return [
-            'user_uuid'    => $user->uuid,
-            'created_uuid' => $request->user()->uuid,
             'updated_uuid' => $request->user()->uuid,
             'salutation'   => $request->post('salutation'),
             'title'        => $request->post('title'),
@@ -147,7 +135,7 @@ class StoreAction
      * @param StoreRequest $request
      * @return array
      */
-    private function prepareAccesslayerData(StoreRequest $request)
+    private function prepareAccesslayerData(UpdateRequest $request)
     {
         return [
             'created_uuid' => $request->user()->uuid,

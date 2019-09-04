@@ -21,7 +21,7 @@
 @include('partials.messages')
 <div class="card card-default shadow">
     <div class="card-body">
-        <form action="{{ isset($edit) ? route('user-update') : route('user-store') }}" enctype="multipart/form-data" method="post">
+        <form action="{{ route(isset($user) ? 'user-update' : 'user-store') }}" enctype="multipart/form-data" method="post">
             @csrf
             {!! isset($user) ? '<input type="hidden" name="uuid" id="uuid" value="' . $user->uuid . '">' : '' !!}
             <div class="row">

@@ -2,10 +2,36 @@
 
 namespace psnXT\Modules\User\UI\Web\Handlers;
 
+use psnXT\Modules\User\Actions\UpdateAction;
+use psnXT\Modules\User\UI\Web\Requests\UpdateRequest;
+
+/**
+ * Class UpdateHandler
+ * @package psnXT\Modules\User\UI\Web\Handlers
+ */
 class UpdateHandler
 {
-    public function __invoke()
+    /**
+     * @var UpdateAction
+     */
+    private $updateAction;
+
+    /**
+     * UpdateHandler constructor.
+     * @param UpdateAction $updateAction
+     */
+    public function __construct(UpdateAction $updateAction)
     {
-        // TODO: Implement __invoke() method.
+        $this->updateAction = $updateAction;
+    }
+
+    /**
+     * @param UpdateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function __invoke(UpdateRequest $request)
+    {
+        return $this->updateAction->run($request) ? $request->success() : $request->failed();
     }
 }

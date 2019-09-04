@@ -5,10 +5,10 @@ namespace psnXT\Modules\User\UI\Web\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class EditRequest
+ * Class DestroyRequest
  * @package psnXT\Modules\User\UI\Web\Requests
  */
-class EditRequest extends FormRequest
+class DestroyRequest extends FormRequest
 {
     /**
      * @return array
@@ -43,17 +43,22 @@ class EditRequest extends FormRequest
     }
 
     /**
-     * Inject GET parameter "type" into validation data
-     *
-     * @param array $keys Properties to only return
-     *
-     * @return array
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function all($keys = null)
+    public function success()
     {
-        $data         = parent::all($keys);
-        $data['uuid'] = $this->route('uuid');
+        return redirect()->route('user-index')->with([
+            'success' => 'Der Benutzer wurde erfolgreich gelöscht.'
+        ]);
+    }
 
-        return $data;
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function failed()
+    {
+        return redirect()->route('user-index')->with([
+            'error' => 'Der Benutzer konnte aufgrund einer technischen Störung nicht gelöscht werden.'
+        ]);
     }
 }

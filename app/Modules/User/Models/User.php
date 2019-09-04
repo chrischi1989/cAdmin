@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use psnXT\Modules\Dashboard\Models\Dashboard;
 use psnXT\Modules\Tenant\Models\Tenant as TenantRelation;
 use psnXT\Modules\Accesslayer\Models\Layer;
 use psnXT\Traits\Tenant;
@@ -109,6 +110,14 @@ class User extends Authenticatable
     public function passwordReset()
     {
         return $this->hasOne(PasswordReset::class, 'user_uuid', 'uuid');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dashboards()
+    {
+        return $this->hasMany(Dashboard::class, 'user_uuid', 'uuid');
     }
 
     /**

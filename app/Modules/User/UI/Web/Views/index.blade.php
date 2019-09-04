@@ -11,7 +11,7 @@
     ])
 @stop
 @section('content')
-
+@include('partials.messages')
 <div class="row">
     @can('create', User::class)
     <div class="col-6 text-right ml-lg-auto">
