@@ -3,6 +3,10 @@
 @section('pagetitle') Navigation @stop
 @section('pagecss')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.nestable.min.css') }}">
+<style>
+    .dd-item > .dd-content .options { opacity: 0; transition: opacity .3s ease; }
+    .dd-item:hover > .dd-content .options { opacity: 1; }
+</style>
 @stop
 @section('breadcrumb')
     @include('partials.panel.breadcrumb', [
