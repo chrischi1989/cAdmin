@@ -26,10 +26,11 @@ Route::group([
         Route::post('store', StoreHandler::class)->name('user-store');
         Route::get('edit/{uuid}', EditHandler::class)->name('user-edit');
         Route::post('update', UpdateHandler::class)->name('user-update');
-        Route::post('delete', DeleteHandler::class)->name('user-delete');
+        Route::post('destroy', DestroyHandler::class)->name('user-destroy');
         Route::get('profile', ProfilePageHandler::class)->name('user-profile-page');
         Route::post('profile', ProfileHandler::class)->name('user-profile');
         Route::get('xhr/current', XhrCurrentUserHandler::class)->name('user-current');
+        Route::get('xhr/password', XhrPasswordHandler::class)->name('user-generate-password');
         Route::get('unauthorized', UnauthorizedPageHandler::class)->name('user-unauthorized');
     });
 });

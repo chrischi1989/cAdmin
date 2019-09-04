@@ -103,7 +103,8 @@ a {
     }
     &::placeholder {
         font-family: "Nunito", "Font Awesome 5 Free", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        font-weight: 400
+        font-weight: 400;
+        color:#cccccc;
     }
 
     &.shadow {
@@ -138,6 +139,10 @@ a {
     color: #fff;
     border-color: #4198dc;
     background-color: #4198dc
+}
+
+.input-group {
+    border-radius: .5rem;
 }
 
 .input-group-text {
@@ -199,7 +204,12 @@ a {
 }
 
 .dropdown-item {
-    padding: .25rem 0 .25rem .25rem
+    padding: .25rem 0 .25rem .25rem;
+    &:active {
+        color: #16181b;
+        text-decoration: none;
+        background-color: #f8f9fa;
+    }
 }
 
 .card {
@@ -209,54 +219,13 @@ a {
 
         &.card-table {
             .card-header {
-                padding: .58rem .58rem 0 .58rem;
+                padding: .5rem .5rem .5rem 1rem;
                 background: none;
                 border-bottom: 0;
-
-                .card-table-header {
-                    margin-top: .5rem;
-                    padding: .5rem 0;
-                    background: #f4f6fa;
-                    color: #7a858d;
-                    border-bottom: 2px solid #e3e6eb;
-                    border-top: 1px solid #e3e6eb;
-                    font-size: .725vw;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 1px
-                }
             }
 
             .card-body {
-                padding: 0 .58rem;
-
-                .row {
-                    border-bottom: 1px solid #e3e6eb;
-                    transition: background .3s ease;
-                    align-items: center;
-                    padding: .3rem 0;
-
-                    &:hover {
-                        background: #f4f6fa
-                    }
-
-                    &:last-child {
-                        border-bottom-left-radius: .6rem;
-                        border-bottom-right-radius: .6rem;
-                        border-bottom: 0
-                    }
-
-                    > div[data-title] {
-                        display: flex;
-                        margin-bottom: .5rem;
-
-                        &::before {
-                            content: attr(data-title);
-                            font-weight: bold;
-                            flex: 0 1 50%
-                        }
-                    }
-                }
+                padding: 0 1rem;
             }
         }
 
@@ -265,8 +234,8 @@ a {
         }
 
         .card-header {
-            background:#f4f6fa;
-            border-bottom:2px solid #e3e6eb;
+            background:none;
+            border-bottom:0;
             &:first-child {
                 border-radius:.5rem .5rem 0 0;
             }

@@ -19,7 +19,7 @@ class FindUserTask
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|User[]
      */
     public function run($with = []) {
-        return $this->query->with($with)->get();
+        return is_null($this->query) ? $this->user->with($with)->get() : $this->query->get();
     }
 
     /**
@@ -28,9 +28,9 @@ class FindUserTask
      * @return User
      */
     public function byUuid($uuid, $with = []) {
-        $this->query = $this->user->where('uuid', $uuid);
+        $this->query = $this->user->with($with)->where('uuid', $uuid);
 
-        return $this->run($with)->first();
+        return $this->run()->first();
     }
 
     /**
@@ -39,8 +39,8 @@ class FindUserTask
      * @return User
      */
     public function byEmail($email, $with = []) {
-        $this->query = $this->user->where('email_hashed', hash('sha512', $email));
+        $this->query = $this->user->with($with)->where('email_hashed', hash('sha512', $email));
 
-        return $this->run($with)->first();
+        return $this->run()->first();
     }
 }

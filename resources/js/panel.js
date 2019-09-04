@@ -104,3 +104,22 @@ $('body').on('click', '#back', function() {
         $('#back').html('<span class="fas fa-bars fa-fw mr-0"></span> Menü').addClass('empty');
     }
 });
+
+$('.js-select-all').on('click', function() {
+    $('.card-table').find(':checkbox').prop('checked', $(this).prop('checked'));
+    $('.js-bulk-actions').toggleClass('disabled');
+});
+
+$('input.js-select-item').on('click', function() {
+    var $checkedItems = $('.card-table').find('.card-body').find(':checkbox:checked');
+    if($checkedItems.length === 0) {
+        $('.js-bulk-actions').addClass('disabled');
+        $('.js-select-all').prop('checked', '');
+    } else {
+        $('.js-bulk-actions').removeClass('disabled');
+    }
+});
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});

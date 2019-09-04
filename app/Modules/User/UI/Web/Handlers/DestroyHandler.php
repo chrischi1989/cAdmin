@@ -4,7 +4,7 @@
 namespace psnXT\Modules\User\UI\Web\Handlers;
 
 
-class DeleteHandler
+class DestroyHandler
 {
     public function __invoke()
     {

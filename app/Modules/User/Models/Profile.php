@@ -5,6 +5,8 @@ namespace psnXT\Modules\User\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use psnXT\Traits\Tenant;
+use psnXT\Traits\Uuids;
+use psnXT\Traits\Who;
 
 /**
  * Class Profile
@@ -33,6 +35,8 @@ use psnXT\Traits\Tenant;
  */
 class Profile extends Model
 {
+    use Uuids;
+    use Who;
     use Tenant;
 
     /**

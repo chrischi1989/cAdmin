@@ -3,12 +3,16 @@
 namespace psnXT\Modules\User\Models;
 
 use Carbon\Carbon;
+use Hash;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use psnXT\Modules\Tenant\Models\Tenant as TenantRelation;
 use psnXT\Modules\Accesslayer\Models\Layer;
 use psnXT\Traits\Tenant;
+use psnXT\Traits\Uuids;
+use psnXT\Traits\Who;
 
 /**
  * Class User
@@ -29,7 +33,8 @@ use psnXT\Traits\Tenant;
  * @property string $deactivated_uuid
  * @property User $deactivated_by
  * @property Carbon $lastlogin_at
- * @property string $email
+ * @property string $email_hashed
+ * @property string $email_encrypted
  * @property string $password
  * @property string $remember_token
  * @property string $activation_token
@@ -47,6 +52,8 @@ use psnXT\Traits\Tenant;
 class User extends Authenticatable
 {
     use Tenant;
+    use Who;
+    use Uuids;
     use Notifiable;
 
     /**
@@ -73,6 +80,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function tenant()
+    {
+        return $this->hasOne(TenantRelation::class, 'uuid', 'tenant_uuid');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function accesslayer()
@@ -94,5 +109,38 @@ class User extends Authenticatable
     public function passwordReset()
     {
         return $this->hasOne(PasswordReset::class, 'user_uuid', 'uuid');
+    }
+
+    /**
+     * @param $value
+     */
+    public function setEmailHashedAttribute($value)
+    {
+        $this->attributes['email_hashed'] = hash('sha512', $value);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setEmailEncryptedAttribute($value)
+    {
+        $this->attributes['email_encrypted'] = encrypt($value);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function getEmailEncryptedAttribute($value)
+    {
+        return decrypt($value);
     }
 }

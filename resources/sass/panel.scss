@@ -6,7 +6,7 @@
     }
 
     .header-right {
-        padding:.5rem;
+        padding:.5rem 1rem;
     }
 
     .branding {
@@ -116,6 +116,61 @@
 }
 .content {
     padding:2rem 1rem;
+}
+
+ul.table {
+    margin:0;
+    padding:0;
+    list-style: none;
+    li.head {
+        margin:.5rem -1rem 0 -1rem;
+        padding: .5rem 0;
+        background: #f4f6fa;
+        color: #7a858d;
+        border-bottom: 2px solid #e3e6eb;
+        border-top: 1px solid #e3e6eb;
+        font-size: .725vw;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px
+    }
+
+    li.row {
+        border-bottom: 1px solid #e3e6eb;
+        transition: background .3s ease;
+        align-items: center;
+        padding: .5rem 0;
+        margin:0 -1rem;
+
+        &:hover {
+            background: #f4f6fa;
+            .options {
+                opacity: 1;
+            }
+        }
+
+        &:last-child {
+            border-bottom-left-radius: .5rem;
+            border-bottom-right-radius: .5rem;
+            border-bottom: 0
+        }
+
+        > div[data-title] {
+            display: flex;
+            margin-bottom: .5rem;
+
+            &::before {
+                content: attr(data-title);
+                font-weight: bold;
+                flex: 0 1 50%
+            }
+        }
+
+        .options {
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+    }
 }
 
 @media(min-width: 992px) {

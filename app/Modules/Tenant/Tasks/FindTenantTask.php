@@ -34,7 +34,7 @@ class FindTenantTask
      */
     public function run($with = [])
     {
-        return is_null($this->query) ? $this->tenant->with($with)->get() : $this->query->with($with)->get();
+        return is_null($this->query) ? $this->tenant->with($with)->get() : $this->query->get();
     }
 
     /**
@@ -44,8 +44,8 @@ class FindTenantTask
      */
     public function byUuid($uuid, $with = [])
     {
-        $this->query = $this->tenant->where('uuid', $uuid);
+        $this->query = $this->tenant->with($with)->where('uuid', $uuid);
 
-        return $this->run($with)->first();
+        return $this->run()->first();
     }
 }

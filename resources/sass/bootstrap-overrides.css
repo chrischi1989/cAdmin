@@ -55,6 +55,7 @@ body {
 
 a {
   color: #4198dc;
+  transition: color 0.3s ease;
 }
 
 .alert {
@@ -81,20 +82,6 @@ a {
   color: #fff;
 }
 
-.alert-aside {
-  position: absolute;
-  right: 0;
-  top: 10vh;
-  z-index: 100;
-  border-radius: 0.6rem 0 0 0.6rem;
-}
-.alert-aside.slideHide {
-  animation: slideInFromRight 6s ease 0s 1 normal forwards;
-}
-.alert-aside.slideStay {
-  animation: slideInFromRightStay 1s ease 0s 1 normal forwards;
-}
-
 .form-control {
   border: 1px solid #b9c9d5;
   border-radius: 0.5rem;
@@ -105,6 +92,7 @@ a {
 .form-control::placeholder {
   font-family: "Nunito", "Font Awesome 5 Free", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 400;
+  color: #cccccc;
 }
 .form-control.shadow {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
@@ -135,6 +123,10 @@ a {
   color: #fff;
   border-color: #4198dc;
   background-color: #4198dc;
+}
+
+.input-group {
+  border-radius: 0.5rem;
 }
 
 .input-group-text {
@@ -192,60 +184,30 @@ a {
 .dropdown-item {
   padding: 0.25rem 0 0.25rem 0.25rem;
 }
+.dropdown-item:active {
+  color: #16181b;
+  text-decoration: none;
+  background-color: #f8f9fa;
+}
 
 .card.card-default {
   border: none;
   border-radius: 0.5rem;
 }
 .card.card-default.card-table .card-header {
-  padding: 0.58rem 0.58rem 0 0.58rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
   background: none;
   border-bottom: 0;
 }
-.card.card-default.card-table .card-header .card-table-header {
-  margin-top: 0.5rem;
-  padding: 0.5rem 0;
-  background: #f4f6fa;
-  color: #7a858d;
-  border-bottom: 2px solid #e3e6eb;
-  border-top: 1px solid #e3e6eb;
-  font-size: 0.725vw;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
 .card.card-default.card-table .card-body {
-  padding: 0 0.58rem;
-}
-.card.card-default.card-table .card-body .row {
-  border-bottom: 1px solid #e3e6eb;
-  transition: background 0.3s ease;
-  align-items: center;
-  padding: 0.3rem 0;
-}
-.card.card-default.card-table .card-body .row:hover {
-  background: #f4f6fa;
-}
-.card.card-default.card-table .card-body .row:last-child {
-  border-bottom-left-radius: 0.6rem;
-  border-bottom-right-radius: 0.6rem;
-  border-bottom: 0;
-}
-.card.card-default.card-table .card-body .row > div[data-title] {
-  display: flex;
-  margin-bottom: 0.5rem;
-}
-.card.card-default.card-table .card-body .row > div[data-title]::before {
-  content: attr(data-title);
-  font-weight: bold;
-  flex: 0 1 50%;
+  padding: 0 1rem;
 }
 .card.card-default .card-body {
   padding: 1rem;
 }
 .card.card-default .card-header {
-  background: #f4f6fa;
-  border-bottom: 2px solid #e3e6eb;
+  background: none;
+  border-bottom: 0;
 }
 .card.card-default .card-header:first-child {
   border-radius: 0.5rem 0.5rem 0 0;
@@ -262,6 +224,37 @@ a {
   }
   .card.card-default.card-table .card-body .row > div[data-title]::before {
     display: none;
+  }
+
+  .alert-lg-aside-left,
+.alert-lg-aside-right {
+    position: absolute;
+    top: 1.3rem;
+    z-index: 80;
+  }
+
+  .alert-lg-aside-left {
+    position: absolute;
+    left: 0;
+    border-radius: 0 0.6rem 0.6rem 0;
+  }
+  .alert-lg-aside-left.slideHide {
+    animation: slideInFromLeft 6s ease 0s 1 normal forwards;
+  }
+  .alert-lg-aside-left.slideStay {
+    animation: slideInFromLeftStay 1s ease 0s 1 normal forwards;
+  }
+
+  .alert-lg-aside-right {
+    position: absolute;
+    right: 0;
+    border-radius: 0.6rem 0 0 0.6rem;
+  }
+  .alert-lg-aside-right.slideHide {
+    animation: slideInFromRight 6s ease 0s 1 normal forwards;
+  }
+  .alert-lg-aside-right.slideStay {
+    animation: slideInFromRightStay 1s ease 0s 1 normal forwards;
   }
 }
 @media (min-width: 125em) {
@@ -283,9 +276,31 @@ a {
     transform: translateX(100%);
   }
 }
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  16.6666667% {
+    transform: translateX(0);
+  }
+  83.3333333% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 @keyframes slideInFromRightStay {
   0% {
     transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes slideInFromLeftStay {
+  0% {
+    transform: translateX(-100%);
   }
   100% {
     transform: translateX(0);

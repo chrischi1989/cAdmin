@@ -32,6 +32,6 @@ class SendPasswordResetEmailTask
      */
     public function run(User $user)
     {
-        return Mail::to($user->email)->send($this->resetPasswordMail);
+        return Mail::to($user->email_encrypted)->send($this->resetPasswordMail);
     }
 }
