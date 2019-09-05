@@ -1,10 +1,9 @@
-@php use psnXT\Modules\Navigation\Models\Item; @endphp
 <li class="dd-item{{ !$item->childItems->isEmpty() ? ' has-children' : '' }}" data-id="{{ $item->uuid }}">
     <div class="dd-handle"></div>
     <div class="dd-content">
         <div class="d-flex justify-content-between align-items-center">
             <span>{{ $item->title }}</span>
-            <form action="{{ route('navigation-destroy') }}" enctype="multipart/form-data" method="post">
+            <form action="{{ route('navigation-destroy') }}" enctype="multipart/form-data" method="post" class="options">
                 @csrf
 
                 <input type="hidden" name="uuid" id="uuid" value="{{ $item->uuid }}">
@@ -24,13 +23,12 @@
                         </div>
                     </div>
                 </div>
-                @can('edit', Item::class)
-
+                @can('edit', $item)
                 <a href="{{ route('navigation-edit', ['uuid' => $item->uuid]) }}" class="btn btn-transparent" data-toggle="tooltip" title="Bearbeiten">
                     <span class="far fa-edit"></span>
                 </a>
                 @endcan
-                @can('destroy', Item::class)
+                @can('destroy', $item)
                 @if($item->deleteable && $item->childItems->isEmpty())
 
                 <button class="btn btn-transparent delete" data-message="Wollen Sie dieses Navigationselement wirklich löschen?" data-toggle="tooltip" title="Löschen">

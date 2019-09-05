@@ -28,11 +28,9 @@ class StoreUserTask
     /**
      * @param array $data
      * @return bool
-     * @throws \Exception
      */
     public function run($data = [])
     {
-        $this->user->uuid                  = Uuid::uuid4();
         $this->user->tenant_uuid           = $data['tenant_uuid'] ?? null;
         $this->user->created_uuid          = $data['created_uuid'] ?? $this->user->uuid;
         $this->user->updated_uuid          = $data['updated_uuid'] ?? $this->user->uuid;
@@ -41,7 +39,8 @@ class StoreUserTask
         $this->user->deactivated_at        = $data['deactivated_at'] ?? null;
         $this->user->deactivated_uuid      = $data['deactivated_uuid'] ?? null;
         $this->user->lastlogin_at          = $data['lastlogin_at'] ?? null;
-        $this->user->email                 = $data['email'];
+        $this->user->email_hashed          = $data['email'];
+        $this->user->email_encrypted       = $data['email'];
         $this->user->password              = $data['password'];
         $this->user->activation_token      = $data['activation_token'] ?? null;
         $this->user->failed_logins         = $data['failed_logins'] ?? 0;

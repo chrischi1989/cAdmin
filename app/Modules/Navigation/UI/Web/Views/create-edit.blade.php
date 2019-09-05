@@ -1,5 +1,8 @@
 @php use psnXT\Modules\Navigation\Models\Item; @endphp
 @extends('layouts.panel')
+@section('pagetitle')
+    Navigation &raquo; Element {{ isset($item) ? 'bearbeiten' : 'erstellen' }}
+@stop
 @section('pagecss')
 <style>
 .icon-item.selected { background:#dedede; border-radius:4px; }
@@ -14,7 +17,7 @@
                 'href'  => route('navigation-index'),
             ],
             [
-                'title'  => 'Element erstellen',
+                'title'  => 'Element ' . (isset($item) ? 'bearbeiten' : 'erstellen'),
                 'active' => true,
             ]
         ]
@@ -33,7 +36,7 @@
             <div class="form-row align-items-end">
                 <div class="col-12 col-md-5">
                     <label class="col-form-label required" for="title">Text für Navigationspunkt</label>
-                    <div class="input-group">
+                    <div class="input-group shadow">
                         <div class="input-group-prepend">
                             <button class="btn btn-primary btn-block" type="button" data-target="#modal-icons" data-toggle="modal">
                                 {!! isset($item) ? '<span class="' . $item->icon . '"></span>' : 'Icon' !!}
@@ -44,7 +47,7 @@
                 </div>
                 <div class="col-12 col-md-5">
                     <label class="col-form-label required" for="href">URL</label>
-                    <select name="href" id="href" class="custom-select form-control">
+                    <select name="href" id="href" class="custom-select form-control shadow">
                         <option value="">&mdash; Leer &mdash;</option>
                         @foreach($routes as $route)
                         <option value="{{ env('APP_URL') . '/' . $route->uri }}"{{ isset($item) && $item->href == env('APP_URL') . '/' . $route->uri ? ' selected' : '' }}>

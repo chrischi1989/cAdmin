@@ -1,7 +1,4 @@
-html, body, .wrapper {
-  height: 100%;
-}
-
+@charset "UTF-8";
 .header {
   background: #ffffff;
 }
@@ -10,7 +7,7 @@ html, body, .wrapper {
   padding: 0.5rem 2rem;
 }
 .header .header-right {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 .header .branding h1 {
   margin-bottom: 0;
@@ -32,6 +29,8 @@ html, body, .wrapper {
   background: linear-gradient(to bottom, #3f4855 0%, #606a7a 100%);
   color: #ffffff;
   padding-top: 2rem;
+  position: relative;
+  z-index: 99;
 }
 .navigation .fas, .navigation .far {
   color: #b6c1d0;
@@ -50,10 +49,9 @@ html, body, .wrapper {
   color: #26425f;
 }
 .navigation > nav {
-  margin: 0 -1rem;
+  margin: 0 -0.9375rem;
 }
 .navigation > nav > ul li {
-  padding: 0.75rem 0 0.75rem 2rem;
   transition: background 0.3s ease, color 0.3s ease;
 }
 .navigation > nav > ul li > ul {
@@ -68,8 +66,10 @@ html, body, .wrapper {
 .navigation > nav > ul li.active span {
   color: #26425f;
 }
-.navigation > nav > ul li a {
+.navigation > nav > ul li a,
+.navigation > nav > ul li span[data-backhtml] {
   display: block;
+  padding: 0.75rem 0 0.75rem 2rem;
 }
 .navigation .hide {
   display: none;
@@ -88,4 +88,76 @@ html, body, .wrapper {
 }
 .navigation #back:not(.empty):hover span {
   color: #26425f;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: none;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  color: #6c757d;
+  font-family: "Nunito", "Font Awesome 5 Free", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  content: "";
+}
+
+.content {
+  padding: 2rem 1rem;
+}
+
+ul.table {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul.table li.head {
+  margin: 0.5rem -1rem 0 -1rem;
+  padding: 0.5rem 0;
+  background: #f4f6fa;
+  color: #7a858d;
+  border-bottom: 2px solid #e3e6eb;
+  border-top: 1px solid #e3e6eb;
+  font-size: 0.725vw;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+ul.table li.row {
+  border-bottom: 1px solid #e3e6eb;
+  transition: background 0.3s ease;
+  align-items: center;
+  padding: 0.5rem 0;
+  margin: 0 -1rem;
+}
+ul.table li.row:hover {
+  background: #f4f6fa;
+}
+ul.table li.row:hover .options {
+  opacity: 1;
+}
+ul.table li.row:last-child {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom: 0;
+}
+ul.table li.row > div[data-title] {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+ul.table li.row > div[data-title]::before {
+  content: attr(data-title);
+  font-weight: bold;
+  flex: 0 1 50%;
+}
+ul.table li.row .options {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+@media (min-width: 992px) {
+  html, body, .wrapper {
+    height: 100%;
+  }
 }

@@ -31,9 +31,11 @@
                                     <span class="fas fa-user"></span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="user-top-menu">
-                                    <a class="dropdown-item" href="{{ route('user-profile-page') }}">
-                                        <span class="fas fa-user-edit"></span> Mein Profil
-                                    </a>
+                                    <div class="dropdown-item">
+                                        <a href="{{ route('user-profile-page') }}" class="btn btn-transparent">
+                                            <span class="fas fa-user-edit"></span> Mein Profil
+                                        </a>
+                                    </div>
                                     <div class="dropdown-item">
                                         <form action="{{ route('user-logout') }}" enctype="multipart/form-data" method="post">
                                             @csrf

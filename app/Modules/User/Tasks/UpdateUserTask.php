@@ -24,7 +24,8 @@ class UpdateUserTask
         $user->deactivated_at        = $data['deactivated_at'] ?? $user->deactivated_at;
         $user->deactivated_uuid      = $data['deactivated_uuid'] ?? $user->deactivated_uuid;
         $user->lastlogin_at          = $data['lastlogin_at'] ?? $user->lastlogin_at;
-        $user->email                 = $data['email'] ?? $user->email;
+        $user->email_hashed          = $data['email'] ?? $user->email_hashed;
+        $user->email_encrypted       = $data['email'] ?? $user->email_encrypted;
         $user->password              = $data['password'] ?? $user->password;
         $user->activation_token      = $data['activation_token'] ?? $user->activation_token;
         $user->failed_logins         = $data['failed_logins'] ?? $user->failed_logins;

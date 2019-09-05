@@ -6,12 +6,13 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use psnXT\Modules\User\Models\User;
 
-class ResetPasswordMail extends Mailable
+class CredentialMail extends Mailable
 {
-    private $token;
-
     use Queueable, SerializesModels;
+
+    private $user;
 
     /**
      * Create a new message instance.
@@ -23,6 +24,10 @@ class ResetPasswordMail extends Mailable
         //
     }
 
+    public function setUser(User $user) {
+        $this->user = $user;
+    }
+
     /**
      * Build the message.
      *
@@ -31,9 +36,9 @@ class ResetPasswordMail extends Mailable
     public function build()
     {
         return $this->from('info@psnmedia.cloud')
-                    ->subject('Zurücksetzen Ihres Passwortes auf ' . env('APP_URL'))
-                    ->view('user::mails.password-reset', [
-                        'token' => session('password_reset_token')
+                    ->subject('Ihre Zugangsdaten auf ' . env('APP_URL'))
+                    ->view('user::mails.credentials', [
+                        'user' => $this->user
                     ]);
     }
 }
