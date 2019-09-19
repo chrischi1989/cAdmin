@@ -81,11 +81,11 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div class="dropdown-item">
-                                        <div>
+                                        <div class="p-2">
                                             <strong>Erstellt:</strong> {{ $user->created_at->format('d.m.Y - H:i') }} Uhr<br>
                                             <strong>von:</strong> {{ is_null($user->createdBy) ? 'Installation' : $user->createdBy->email_encrypted }}
                                         </div>
-                                        <div>
+                                        <div class="p-2">
                                             <strong>Bearbeitet:</strong> {{ $user->updated_at->format('d.m.Y - H:i') }} Uhr<br>
                                             <strong>von:</strong> {{ is_null($user->createdBy) ? 'Installation' : $user->createdBy->email_encrypted }}
                                         </div>
