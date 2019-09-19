@@ -13,13 +13,7 @@
 @section('content')
 @include('partials.messages')
 <div class="row">
-    @can('create', User::class)
-    <div class="col-6 text-right ml-lg-auto">
-        <a href="{{ route('user-create') }}" class="btn btn-primary">
-            <span class="fas fa-plus"></span> Benutzer erstellen
-        </a>
-    </div>
-    @endcan
+    @include('partials.panel.item-create-button', ['item' => User::class])
 </div>
 <div class="card card-default card-table shadow my-3">
     <div class="card-header d-none d-lg-block">
@@ -71,39 +65,11 @@
                 <div class="col-12 col-lg-5" data-title="Benutzername:">{{ $user->email_encrypted }}</div>
                 <div class="col-12 col-lg-4" data-title="Mandant:">{{ $user->tenant->tenant ?? 'Kein' }}</div>
                 <div class="col-12 col-lg-2" data-title="Optionen:">
-                    <form action="{{ route('user-destroy') }}" enctype="multipart/form-data" method="post" class="form-inline justify-content-end options">
-                        @csrf
-                        <input id="uuid" name="uuid" value="{{ $user->uuid }}" type="hidden">
-                        <div class="form-row align-items-center">
-                            <div class="dropdown" data-toggle="tooltip" title="Informationen">
-                                <button class="btn btn-transparent" data-toggle="dropdown">
-                                    <span class="fas fa-info-circle"></span>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-item">
-                                        <div class="p-2">
-                                            <strong>Erstellt:</strong> {{ $user->created_at->format('d.m.Y - H:i') }} Uhr<br>
-                                            <strong>von:</strong> {{ is_null($user->createdBy) ? 'Installation' : $user->createdBy->email_encrypted }}
-                                        </div>
-                                        <div class="p-2">
-                                            <strong>Bearbeitet:</strong> {{ $user->updated_at->format('d.m.Y - H:i') }} Uhr<br>
-                                            <strong>von:</strong> {{ is_null($user->createdBy) ? 'Installation' : $user->createdBy->email_encrypted }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @can('edit', $user)
-                            <a href="{{ route('user-edit', ['uuid' => $user->uuid]) }}" class="btn btn-transparent" data-toggle="tooltip" data-title="Bearbeiten">
-                                <span class="far fa-edit"></span>
-                            </a>
-                            @endcan
-                            @can('destroy', $user)
-                            <button class="btn btn-transparent delete" data-toggle="tooltip" data-title="Löschen" data-message="Wollen Sie diesen Benutzer wirklich löschen?">
-                                <span class="far fa-trash-alt"></span>
-                            </button>
-                            @endcan
-                        </div>
-                    </form>
+                    @include('partials.panel.item-options', [
+                        'section' => 'user',
+                        'item' => $user,
+                        'deleteMessage' => 'Wollen Sie diesen Benutzer wirklich löschen?'
+                    ])
                 </div>
             </li>
             @endforeach
@@ -111,12 +77,6 @@
     </div>
 </div>
 <div class="row">
-    @can('create', User::class)
-        <div class="col-6 text-right ml-lg-auto">
-            <a href="{{ route('user-create') }}" class="btn btn-primary">
-                <span class="fas fa-plus"></span> Benutzer erstellen
-            </a>
-        </div>
-    @endcan
+@include('partials.panel.item-create-button', ['item' => User::class])
 </div>
 @stop

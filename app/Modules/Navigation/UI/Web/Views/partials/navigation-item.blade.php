@@ -8,21 +8,7 @@
 
                 <input type="hidden" name="uuid" id="uuid" value="{{ $item->uuid }}">
                 <div class="form-row align-items-center">
-                <div class="dropdown" data-toggle="tooltip" title="Informationen">
-                    <button class="btn btn-transparent" data-toggle="dropdown">
-                        <span class="fas fa-info-circle"></span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-item">
-                            <div>
-                                <strong>Erstellt:</strong> {{ $item->created_at->format('d.m.Y - H:i') }} Uhr<br><strong>von:</strong> {{ is_null($item->createdBy) ? 'Installation' : $item->createdBy->email }}
-                            </div>
-                            <div>
-                                <strong>Bearbeitet:</strong> {{ $item->updated_at->format('d.m.Y - H:i') }} Uhr<br><strong>von:</strong> {{ is_null($item->createdBy) ? 'Installation' : $item->createdBy->email }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('partials.panel.created-updated', ['item' => $item])
                 @can('edit', $item)
                 <a href="{{ route('navigation-edit', ['uuid' => $item->uuid]) }}" class="btn btn-transparent" data-toggle="tooltip" title="Bearbeiten">
                     <span class="far fa-edit"></span>
