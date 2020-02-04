@@ -20,7 +20,11 @@ class Tenant
         $database = DB::connection('mysql')
                       ->table('tenants_databases')
                       ->where('uuid', function() {
-                          return auth()->check() ? auth()->user()->tenant_uuid : session('connection');
+                          if(auth()->check() && !is_null(auth()->user()->tenant_uuid)) {
+                              return auth()->user()->tenant_uuid;
+                          }
+
+                          return session('connection');
                       })->get()->first();
 
         config(['database.connections.' . $database->uuid => [
