@@ -35,7 +35,7 @@ class CredentialMail extends Mailable
      */
     public function build()
     {
-        return $this->from('info@psnmedia.cloud')
+        return $this->from('info@cadmin.local')
                     ->subject('Ihre Zugangsdaten auf ' . env('APP_URL'))
                     ->view('user::mails.credentials', [
                         'user' => $this->user

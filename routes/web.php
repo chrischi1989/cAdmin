@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('pw/{length?}', function($length = 12) { return \psnXT\Helpers::generatePassword($length); });
+Route::get('pw/{length?}', function($length = 12) { return \App\Helpers::generatePassword($length); });
 Route::get('hash/{value}', function($value) { return Hash::make($value); });
 Route::get('uuid', function() { return \Ramsey\Uuid\Uuid::uuid4(); });
 Route::get('enc/{value}', function($value) { return encrypt($value); });

@@ -4,12 +4,12 @@ $.ajaxSetup({
     }
 });
 
-bootbox.addLocale('psn', {
+bootbox.addLocale('cadmin', {
     OK : 'OK',
     CANCEL : 'Abbrechen',
     CONFIRM : 'Bestätigen'
 });
-bootbox.setLocale('psn');
+bootbox.setLocale('cadmin');
 
 var $currentUser = null;
 $.ajax({

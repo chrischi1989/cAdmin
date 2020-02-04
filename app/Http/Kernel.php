@@ -75,9 +75,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middlewarePriority = [
-        \psnXT\Http\Middleware\CheckInstallation::class,
+        \App\Http\Middleware\CheckInstallation::class,
         \Illuminate\Session\Middleware\StartSession::class,
-        \psnXT\Http\Middleware\Tenant::class,
+        \App\Http\Middleware\Tenant::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\Authenticate::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,

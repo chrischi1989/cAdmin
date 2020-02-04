@@ -41,7 +41,7 @@
                                         <label for="APP_NAME" class="col-form-label required">Name der Anwendung:</label>
                                         <input id="APP_NAME"
                                                name="APP_NAME"
-                                               placeholder="psnCore"
+                                               placeholder="cAdmin"
                                                value="{{ old('APP_NAME') }}"
                                                class="form-control shadow{{ $errors->has('APP_NAME') ? ' is-invalid' : ''}}">
                                     </div>

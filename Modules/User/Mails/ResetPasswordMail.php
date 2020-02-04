@@ -30,7 +30,7 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->from('info@psnmedia.cloud')
+        return $this->from('info@cadmin.local')
                     ->subject('Zurücksetzen Ihres Passwortes auf ' . env('APP_URL'))
                     ->view('user::mails.password-reset', [
                         'token' => session('password_reset_token')
