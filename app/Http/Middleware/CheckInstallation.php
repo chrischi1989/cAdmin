@@ -1,6 +1,6 @@
 <?php
 
-namespace psnXT\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Closure;
 
@@ -15,7 +15,7 @@ class CheckInstallation
      */
     public function handle($request, Closure $next)
     {
-        if (!file_exists(base_path() . '/install.lock')) {
+        if(!file_exists(base_path() . '/install.lock')) {
             return redirect()->route('setup');
         }
 

@@ -1,7 +1,7 @@
 <?php
-namespace psnXT\Traits;
+namespace App\Traits;
 
-use psnXT\Modules\User\Models\User;
+use Modules\User\Models\User;
 
 trait Who
 {

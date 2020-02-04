@@ -1,5 +1,5 @@
 <?php
-namespace psnXT\Traits;
+namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Ramsey\Uuid\Uuid;
@@ -13,8 +13,8 @@ trait Uuids
     {
         parent::boot();
 
-        static::creating(function($model) {
-            if (!isset($model->attributes['uuid'])) {
+        static::creating(function ($model) {
+            if(!isset($model->attributes['uuid'])) {
                 $model->{$model->getKeyName()} = Uuid::uuid4();
             }
         });

@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'Europe/Berlin',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -169,12 +169,12 @@ return [
         /*
          * Application Service Providers...
          */
-        psnXT\Providers\AppServiceProvider::class,
-        psnXT\Providers\AuthServiceProvider::class,
-        // psnXT\Providers\BroadcastServiceProvider::class,
-        psnXT\Providers\EventServiceProvider::class,
-        psnXT\Providers\RouteServiceProvider::class,
-        psnXT\Providers\ModuleServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        App\Providers\ModuleServiceProvider::class
 
     ],
 

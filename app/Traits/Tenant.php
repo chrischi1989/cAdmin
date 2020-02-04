@@ -1,6 +1,6 @@
 <?php
 
-namespace psnXT\Traits;
+namespace App\Traits;
 
 trait Tenant
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace psnXT\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Closure;
-use psnXT\Modules\Setting\Models\Setting;
+use Modules\Setting\Models\Setting;
 
 class Settings
 {
@@ -17,7 +17,7 @@ class Settings
         $settings = Setting::with('module')->get();
 
         /** @var Setting $setting */
-        foreach ($settings as $setting) {
+        foreach($settings as $setting) {
             config([$setting->module->module . '.' . $setting->setting => $setting]);
         }
 

@@ -21,16 +21,37 @@
                     <div class="row align-items-center">
                         <div class="col-10">@yield('breadcrumb')</div>
                         <div class="col-2 text-right">
+                            <div class="row justify-content-end">
                             <div class="dropdown">
                                 <button type="button"
-                                        class="btn btn-secondary dropdown-toggle"
+                                        class="btn btn-primary dropdown-toggle"
+                                        id="user-top-menu"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <span class="fas fa-fill-drip"></span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user-top-menu">
+                                    <div class="dropdown-item">
+                                        <div class="row flex-wrap w-50">
+                                            <div class="col-1 h-50" style="background-color:#272d36;">&nbsp;</div>
+                                            <div class="col-1 h-50" style="background-color:#5d6777;">&nbsp;</div>
+                                            <div class="col-1 h-50" style="background-color:#eff1f4;">&nbsp;</div>
+                                            <div class="col-1 h-50" style="background-color:#ffffff;">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown mx-2">
+                                <button type="button"
+                                        class="btn btn-primary dropdown-toggle"
                                         id="user-top-menu"
                                         data-toggle="dropdown"
                                         aria-haspopup="true"
                                         aria-expanded="false">
                                     <span class="fas fa-user"></span>
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="user-top-menu">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user-top-menu">
                                     <div class="dropdown-item">
                                         <a href="{{ route('user-profile-page') }}" class="btn btn-transparent">
                                             <span class="fas fa-user-edit"></span> Mein Profil
@@ -45,6 +66,7 @@
                                         </form>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
