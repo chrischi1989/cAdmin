@@ -9,7 +9,7 @@ abstract class Helpers
      *
      * @return null|string
      */
-    public static function generatePassword($length = 12)
+    public static function generatePassword($length = 16)
     {
         $return      = null;
         $chars       = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()[]{}?!$%&/=*~,.;:<>-_';
