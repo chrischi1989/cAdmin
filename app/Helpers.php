@@ -11,16 +11,18 @@ abstract class Helpers
      */
     public static function generatePassword($length = 12)
     {
-        $length = $length < 12 ? 12 : $length;
         $return      = null;
         $chars       = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()[]{}?!$%&/=*~,.;:<>-_';
+        $length      = $length < 12 ? 12 : $length;
         $charsLength = strlen($chars);
+
         for ($i = 0; $i < $length; $i++) {
             $randomChar  = $chars[mt_rand(0, $charsLength - 1)];
             $chars       = str_replace($randomChar, '', $chars);
             $charsLength = strlen($chars);
-            $return .= $randomChar;
+            $return     .= $randomChar;
         }
+
         $containsLowercaseLetter = (bool)preg_match('/[a-z]/', $return);
         $containsUppercaseLetter = (bool)preg_match('/[A-Z]/', $return);
         $containsNumber          = (bool)preg_match('/\d/', $return);
