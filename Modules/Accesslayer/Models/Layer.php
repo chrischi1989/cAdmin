@@ -6,6 +6,7 @@ use App\Traits\Tenant;
 use App\Traits\Uuids;
 use App\Traits\Who;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Module\Models\ModulePermission;
 use Modules\User\Models\User;
@@ -23,6 +24,7 @@ use Modules\User\Models\User;
  * @property User $updated_by
  * @property string $layer
  * @property int $priority
+ * @property Collection $permissions
  *
  * @package Modules\Accesslayer\Models
  */

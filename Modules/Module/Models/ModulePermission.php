@@ -16,6 +16,7 @@ use App\Traits\Tenant;
  * @property Carbon $updated_at
  * @property string $permission
  * @property Layer $accesslayer
+ * @property Module $module
  *
  * @package Modules\Modules\Entities
  */

@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Modules\Accesslayer\Models\Layer;
+use Modules\Module\Models\ModulePermission;
 
 class Authenticate extends Middleware
 {
@@ -11,29 +13,20 @@ class Authenticate extends Middleware
     {
         $this->authenticate($request, $guards);
 
-        $container   = [];
-        $currentUser = $request->user()->load(['accesslayer.permissions.module', 'profile']);
-
-        foreach($currentUser->accesslayer as $layer) {
-            $request->user()->priority = $layer->priority > $request->user()->priority ? $layer->priority : $request->user()->priority;
-            foreach($layer->permissions as $permission) {
-                $module = strtolower($permission->module->module);
-                $container[$module][] = $permission->permission;
-            }
-        }
-
         $permissions = collect();
-        foreach($container as $module => $set) {
-            $modulePermissions = collect();
-            foreach($set as $index => $value) {
-                $modulePermissions->put($value, true);
-            }
+        $currentUser = $request->user();
+        $currentUser->load(['accesslayers.permissions.module', 'profile']);
+        $currentUser->priority = $currentUser->accesslayers->max('priority');
+        $currentUser->accesslayers->map(function(Layer $layer) use(&$permissions) {
+            $layer->permissions->map(function(ModulePermission $permission) use(&$permissions) {
+                $module = strtolower($permission->module->module);
 
-            $permissions->put($module, $modulePermissions);
-        }
+                $permissions->has($module) ? $permissions->get($module)->push($permission->permission) : $permissions->put($module, collect($permission->permission));
+            });
+        });
 
-        $request->user()->permissions = $permissions;
-        view()->share('currentUser', $request->user());
+        $currentUser->permissions = $permissions;
+        view()->share('currentUser', $currentUser);
 
         return $next($request);
     }
