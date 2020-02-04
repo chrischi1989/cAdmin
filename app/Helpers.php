@@ -13,21 +13,32 @@ abstract class Helpers
     {
         $return      = null;
         $chars       = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()[]{}?!$%&/=*~,.;:<>-_';
-        $length      = $length < 12 ? 12 : $length;
         $charsLength = strlen($chars);
 
         for ($i = 0; $i < $length; $i++) {
             $randomChar  = $chars[mt_rand(0, $charsLength - 1)];
             $chars       = str_replace($randomChar, '', $chars);
             $charsLength = strlen($chars);
-            $return     .= $randomChar;
+            $return      .= $randomChar;
         }
 
         $containsLowercaseLetter = (bool)preg_match('/[a-z]/', $return);
         $containsUppercaseLetter = (bool)preg_match('/[A-Z]/', $return);
         $containsNumber          = (bool)preg_match('/\d/', $return);
         $containsSpecial         = (bool)preg_match('/[\(\)\[\]\{\}\?\!\$\%\&\/\=\*\~\,\.\;\:\<\>\-\_]/', $return);
-        if (!$containsLowercaseLetter || !$containsUppercaseLetter || !$containsNumber || !$containsSpecial) {
+        if (!$containsLowercaseLetter) {
+            return self::generatePassword($length);
+        }
+
+        if (!$containsUppercaseLetter) {
+            return self::generatePassword($length);
+        }
+
+        if (!$containsNumber) {
+            return self::generatePassword($length);
+        }
+
+        if (!$containsSpecial) {
             return self::generatePassword($length);
         }
 
@@ -52,7 +63,8 @@ abstract class Helpers
      * @param array $array
      * @return array
      */
-    public static function array_filter_deep($array) {
+    public static function array_filter_deep($array)
+    {
         // If it is an element, then just return it
         if (!is_array($array)) {
             return $array;
@@ -62,7 +74,7 @@ abstract class Helpers
 
         foreach ($array as $key => $value) {
             // Ignore empty cells
-            if($value || is_numeric($value)) {
+            if ($value || is_numeric($value)) {
                 // Use recursion to evaluate cells
                 $non_empty_items[$key] = self::array_filter_deep($value);
             }
