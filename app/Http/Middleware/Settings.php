@@ -17,7 +17,7 @@ class Settings
         $settings = Setting::with('module')->get();
 
         /** @var Setting $setting */
-        foreach($settings as $setting) {
+        foreach ($settings as $setting) {
             config([$setting->module->module . '.' . $setting->setting => $setting]);
         }
 

@@ -19,7 +19,7 @@ abstract class Helpers
             $randomChar  = $chars[mt_rand(0, $charsLength - 1)];
             $chars       = str_replace($randomChar, '', $chars);
             $charsLength = strlen($chars);
-            $return      .= $randomChar;
+            $return .= $randomChar;
         }
 
         $containsLowercaseLetter = (bool)preg_match('/[a-z]/', $return);

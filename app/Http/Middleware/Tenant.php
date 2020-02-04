@@ -18,14 +18,14 @@ class Tenant
     public function handle($request, Closure $next)
     {
         $database = DB::connection('mysql')
-                      ->table('tenants_databases')
-                      ->where('uuid', function() {
-                          if(auth()->check() && !is_null(auth()->user()->tenant_uuid)) {
-                              return auth()->user()->tenant_uuid;
-                          }
+                        ->table('tenants_databases')
+                        ->where('uuid', function() {
+                            if(auth()->check() && !is_null(auth()->user()->tenant_uuid)) {
+                                return auth()->user()->tenant_uuid;
+                            }
 
-                          return session('connection');
-                      })->get()->first();
+                            return session('connection');
+                        })->get()->first();
 
         config(['database.connections.' . $database->uuid => [
             'driver' => 'mysql',
