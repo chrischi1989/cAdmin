@@ -1,5 +1,5 @@
 @if(!is_null($item->module))
-@if(Arr::has($currentUser->permissions, strtolower($item->module->module) . '.show'))
+@if($currentUser->permissions->get(strtolower($item->module->module))->contains('show'))
 <li{!! isset($active) && strtolower($item->module->module) == $active ? ' class="active"' : null !!}>
     @if(!$item->childItems->isEmpty())
     <span data-backhtml="<span class='fas fa-angle-left fa-fw mr-0'></span> {{ $item->title }}">

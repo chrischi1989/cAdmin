@@ -61,7 +61,7 @@ class InstallAction
     {
         session([
             'uuid'     => Uuid::uuid4(),
-            'password' => Helpers::generatePassword()
+            'password' => 'abc.123'
         ]);
 
         $envData = [

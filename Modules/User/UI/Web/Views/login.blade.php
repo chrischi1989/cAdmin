@@ -15,7 +15,7 @@
 <div class="d-flex align-items-center justify-content-center h-100 background">
     <div class="col-12 col-sm-10 col-lg-8 col-xl-4">
         <div class="text-center my-5">
-            <img src="{{ asset('storage/logo.png') }}">
+            <img src="{{ asset('storage/logo.jpg') }}">
         </div>
         <div class="card card-default shadow">
             <h2 class="text-center mt-5 mb-3">Willkommen</h2>

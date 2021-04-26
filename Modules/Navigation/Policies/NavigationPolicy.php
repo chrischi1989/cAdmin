@@ -15,6 +15,6 @@ class NavigationPolicy
         /** @var User $user */
         $user = $arguments[0];
 
-        return Arr::has($user->permissions, 'navigation.' . $permission);
+        return $user->permissions->get('navigation')->contains($permission);
     }
 }

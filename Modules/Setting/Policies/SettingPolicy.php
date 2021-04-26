@@ -15,6 +15,6 @@ class SettingPolicy
         /** @var User $user */
         $user = $arguments[0];
 
-        return Arr::has($user->permissions, 'setting.' . $permission);
+        return $user->permissions->get('setting')->contains($permission);
     }
 }

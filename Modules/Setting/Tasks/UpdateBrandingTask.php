@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Modules\Setting\Tasks;
+namespace Modules\Setting\Tasks;
 
 class UpdateBrandingTask
 {

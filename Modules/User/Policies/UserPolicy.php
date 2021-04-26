@@ -15,6 +15,6 @@ class UserPolicy
         /** @var User $user */
         $user = $arguments[0];
 
-        return Arr::has($user->permissions, 'user.' . $permission);
+        return $user->permissions->get( 'user')->contains($permission);
     }
 }

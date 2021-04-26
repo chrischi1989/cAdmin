@@ -15,6 +15,6 @@ class AccesslayerPolicy
         /** @var User $user */
         $user = $arguments[0];
 
-        return Arr::has($user->permissions, 'accesslayer.' . $permission);
+        return $user->permissions->get('accesslayer')->contains($permission);
     }
 }

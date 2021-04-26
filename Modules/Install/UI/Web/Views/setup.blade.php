@@ -21,7 +21,7 @@
 <div class="d-flex align-items-center justify-content-center h-100 background">
     <div class="col-12 col-lg-10 col-xl-8 pt-5">
         <div class="text-center my-5">
-            <img src="{{ asset('storage/logo.png') }}">
+            <img src="{{ asset('storage/logo.jpg') }}">
         </div>
         <form action="{{ route('install') }}" enctype="multipart/form-data" method="post">
             @csrf

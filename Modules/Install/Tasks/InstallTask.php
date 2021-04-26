@@ -18,7 +18,6 @@ class InstallTask
     {
         Artisan::call('config:clear');
         Artisan::call('cache:clear');
-        Artisan::call('key:generate');
         Artisan::call('storage:link');
 
         DB::purge();

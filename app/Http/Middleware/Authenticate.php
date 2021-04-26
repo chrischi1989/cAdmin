@@ -15,9 +15,9 @@ class Authenticate extends Middleware
 
         $permissions = collect();
         $currentUser = $request->user();
-        $currentUser->load(['accesslayers.permissions.module', 'profile']);
-        $currentUser->priority = $currentUser->accesslayers->max('priority');
-        $currentUser->accesslayers->map(function(Layer $layer) use(&$permissions) {
+        $currentUser->load(['accesslayer.permissions.module', 'profile']);
+        $currentUser->priority = $currentUser->accesslayer->max('priority');
+        $currentUser->accesslayer->map(function(Layer $layer) use(&$permissions) {
             $layer->permissions->map(function(ModulePermission $permission) use(&$permissions) {
                 $module = strtolower($permission->module->module);
 
@@ -26,6 +26,7 @@ class Authenticate extends Middleware
         });
 
         $currentUser->permissions = $permissions;
+
         view()->share('currentUser', $currentUser);
 
         return $next($request);

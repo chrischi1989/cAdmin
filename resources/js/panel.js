@@ -51,10 +51,12 @@ var $backTexts = [];
 var $current   = null;
 var $previous  = null;
 
-$('.navigation nav ul > li.active').parents('ul').each(function($index, $element) {
+$('.navigation nav ul li.active').parents('ul').each(function($index, $element) {
     if($($element).parent().is('li')) {
         $backTexts.push($($element).parent().find('span[data-backhtml]').data('backhtml'));
     }
+
+    console.log($backTexts);
 
     $e = $($element).clone(true);
     if($index == 0) {

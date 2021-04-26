@@ -15,6 +15,6 @@ class ModulePolicy
         /** @var User $user */
         $user = $arguments[0];
 
-        return Arr::has($user->permissions, 'module.' . $permission);
+        return $user->permissions->get('module')->contains($permission);
     }
 }

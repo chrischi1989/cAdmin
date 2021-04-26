@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $now        = now();
         $moduleUuid = Uuid::uuid4();
 
-        if(session()->has('tenant-seed')) {
+        if(!session()->has('tenant-seed')) {
             DB::table('users')->insert([
                 'uuid'                  => session('uuid'),
                 'created_at'            => $now,
@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
                 'updated_uuid'          => session('uuid'),
                 'activated_at'          => $now,
                 'activated_uuid'        => session('uuid'),
-                'email_hashed'          => hash('sha512', request()->input('email')),
-                'email_encrypted'       => encrypt(request()->input('email')),
+                'email_hashed'          => hash('sha512', request('email')),
+                'email_encrypted'       => encrypt(request('email')),
                 'password'              => Hash::make(session('password')),
                 'activation_token'      => Str::random(20),
                 'failed_logins_max'     => 5,

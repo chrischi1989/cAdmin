@@ -2,7 +2,7 @@
 
 namespace Modules\User\UI\Web\Handlers;
 
-use Helpers;
+use App\Helpers;
 
 class XhrPasswordHandler
 {

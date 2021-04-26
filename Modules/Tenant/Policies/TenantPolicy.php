@@ -15,6 +15,6 @@ class TenantPolicy
         /** @var User $user */
         $user = $arguments[0];
 
-        return Arr::has($user->permissions, 'tenant.' . $permission);
+        return $user->permissions->get('tenant')->contains($permission);
     }
 }
