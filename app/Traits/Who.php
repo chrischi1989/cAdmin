@@ -14,4 +14,6 @@ trait Who
     {
         return $this->belongsTo(User::class, 'updated_uuid', 'uuid');
     }
+    
+    abstract public function belongsTo($related, $foreignKey = null, $ownerKey = null, $relation = null);
 }
