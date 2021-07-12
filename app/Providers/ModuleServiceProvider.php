@@ -6,7 +6,8 @@ use Illuminate\Support\ServiceProvider;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    public function register() {
+    public function register()
+    {
         foreach (scandir(base_path('Modules')) as $module) {
             if ($module != '.' && $module != '..') {
                 $this->app->register("Modules\\$module\ServiceProvider");
