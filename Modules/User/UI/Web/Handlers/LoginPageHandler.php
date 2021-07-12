@@ -2,7 +2,11 @@
 
 namespace Modules\User\UI\Web\Handlers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Modules\User\Actions\LoginPageAction;
 
 /**
@@ -20,7 +24,7 @@ class LoginPageHandler
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|RedirectResponse|View
      */
     public function __invoke(Request $request)
     {

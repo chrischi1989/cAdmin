@@ -5,6 +5,9 @@ namespace Modules\User\Models;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -83,41 +86,41 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function tenant()
+    public function tenant(): HasOne
     {
         return $this->hasOne(TenantRelation::class, 'uuid', 'tenant_uuid');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function accesslayer()
+    public function accesslayer(): BelongsToMany
     {
         return $this->belongsToMany(Layer::class, 'users_has_accesslayer', 'user_uuid', 'layer_uuid');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function profile()
+    public function profile(): HasOne
     {
         return $this->hasOne(Profile::class, 'user_uuid', 'uuid');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function passwordReset()
+    public function passwordReset(): HasOne
     {
         return $this->hasOne(PasswordReset::class, 'user_uuid', 'uuid');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function dashboards()
+    public function dashboards(): HasMany
     {
         return $this->hasMany(Dashboard::class, 'user_uuid', 'uuid');
     }

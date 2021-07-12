@@ -3,8 +3,10 @@
 namespace Modules\User\UI\Web\Handlers;
 
 use App\Controller;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Modules\User\Actions\IndexAction;
-use Modules\User\Models\User;
 
 /**
  * Class IndexHandler
@@ -17,23 +19,27 @@ class IndexHandler extends Controller
      */
     private $indexAction;
 
+    private $view;
+
     /**
      * IndexHandler constructor.
      * @param IndexAction $indexAction
+     * @param Factory $view
      */
-    public function __construct(IndexAction $indexAction)
+    public function __construct(IndexAction $indexAction, Factory $view)
     {
         $this->indexAction = $indexAction;
+        $this->view        = $view;
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return View
+     * @throws AuthorizationException
      */
-    public function __invoke()
+    public function __invoke(): View
     {
         $users = $this->indexAction->run();
 
-        return view('user::index', ['users' => $users]);
+        return $this->view->make('user::index', ['users' => $users]);
     }
 }

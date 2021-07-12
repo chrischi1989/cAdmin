@@ -2,6 +2,10 @@
 
 namespace Modules\User\Actions;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Modules\User\Models\User;
 use Modules\User\Tasks\AuthorizeActionTask;
 use Modules\User\Tasks\FindUserTask;
@@ -26,17 +30,17 @@ class IndexAction
      * @param FindUserTask $findUserTask
      * @param AuthorizeActionTask $authorizeActionTask
      */
-    public function __construct(FindUserTask $findUserTask, AuthorizeActionTask $authorizeActionTask)
+    public function __construct(FindUserTask $findUserTask, AuthorizeActionTask $authorizeActionTask, Factory $view)
     {
         $this->findUserTask        = $findUserTask;
         $this->authorizeActionTask = $authorizeActionTask;
 
-        view()->share('active', 'user');
+        $view->share('active', 'user');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|User[]
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return Builder[]|Collection|User[]
+     * @throws AuthorizationException
      */
     public function run()
     {

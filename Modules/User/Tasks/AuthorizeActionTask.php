@@ -3,6 +3,8 @@
 namespace Modules\User\Tasks;
 
 use App\Controller;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Access\Response;
 
 /**
  * Class AuthorizeActionTask
@@ -13,8 +15,8 @@ class AuthorizeActionTask extends Controller
     /**
      * @param $ability
      * @param $class
-     * @return \Illuminate\Auth\Access\Response
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return Response
+     * @throws AuthorizationException
      */
     public function run($ability, $class)
     {

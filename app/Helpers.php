@@ -26,19 +26,7 @@ abstract class Helpers
         $containsUppercaseLetter = (bool)preg_match('/[A-Z]/', $return);
         $containsNumber          = (bool)preg_match('/\d/', $return);
         $containsSpecial         = (bool)preg_match('/[\(\)\[\]\{\}\?\!\$\%\&\/\=\*\~\,\.\;\:\<\>\-\_]/', $return);
-        if (!$containsLowercaseLetter) {
-            return self::generatePassword($length);
-        }
-
-        if (!$containsUppercaseLetter) {
-            return self::generatePassword($length);
-        }
-
-        if (!$containsNumber) {
-            return self::generatePassword($length);
-        }
-
-        if (!$containsSpecial) {
+        if (!$containsLowercaseLetter || !$containsUppercaseLetter || !$containsNumber || !$containsSpecial) {
             return self::generatePassword($length);
         }
 

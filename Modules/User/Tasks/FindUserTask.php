@@ -2,6 +2,8 @@
 
 namespace Modules\User\Tasks;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Modules\User\Models\User;
 
 class FindUserTask
@@ -16,9 +18,9 @@ class FindUserTask
 
     /**
      * @param array $with
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|User[]
+     * @return Builder[]|Collection|User[]
      */
-    public function run($with = []) {
+    public function run(array $with = []) {
         return is_null($this->query) ? $this->user->with($with)->get() : $this->query->get();
     }
 
@@ -27,7 +29,8 @@ class FindUserTask
      * @param array $with
      * @return User
      */
-    public function byUuid($uuid, $with = []) {
+    public function byUuid($uuid, array $with = []): User
+    {
         $this->query = $this->user->with($with)->where('uuid', $uuid);
 
         return $this->run()->first();
@@ -38,7 +41,8 @@ class FindUserTask
      * @param array $with
      * @return User
      */
-    public function byEmail($email, $with = []) {
+    public function byEmail($email, array $with = []): User
+    {
         $this->query = $this->user->with($with)->where('email_hashed', hash('sha512', $email));
 
         return $this->run()->first();
