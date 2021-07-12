@@ -11,7 +11,7 @@ abstract class Helpers
      */
     public static function generatePassword($length = 16)
     {
-        $return      = null;
+        $return      = '';
         $chars       = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()[]{}?!$%&/=*~,.;:<>-_';
         $charsLength = strlen($chars);
 
